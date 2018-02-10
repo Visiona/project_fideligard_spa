@@ -1,0 +1,29 @@
+{
+  "name": "project_fideligard_spa",
+  "version": "1.0.0",
+  "description": "Fideligard Stock Simulator",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Visiona/project_fideligard_spa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Visiona/project_fideligard_spa/issues"
+  },
+  "homepage": "https://github.com/Visiona/project_fideligard_spa#readme",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "es6-promise": "^4.2.4",
+    "express": "^4.16.2",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  }
+}
