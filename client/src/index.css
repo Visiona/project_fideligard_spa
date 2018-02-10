@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h3.title {
+  font-family: 'Old Standard TT', serif;
+}
+
+.menu-link {
+  font-family: 'Old Standard TT', serif;
+  color: #120D6A;
+}
