@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DateWidget from '../components/DateWidget'
-import { setCurrentDate } from '../actions'
+import { setCurrentDate } from '../actions/dates'
 import { connect } from 'react-redux'
 
 class DateContainer extends Component {

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Stocks = () => (
+const Stocks = ({props}) => (
     <div className='stock-box'>
       <h4>Stocks------------------<b>FILTER</b></h4>
-
+      {this.props}
       <table className="hover" >
         <thead>
           <tr>

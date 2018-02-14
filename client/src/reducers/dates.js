@@ -1,4 +1,4 @@
-import { CHOSEN_DAY_NUMBER } from '../actions'
+import { CHOSEN_DAY_NUMBER } from '../actions/dates'
 import { daysFromMinToYesterday } from '../helpers'
 
 

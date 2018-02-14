@@ -6,7 +6,7 @@ import {
   Switch } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import Navbar from './Navbar'
-import Stocks from './Stocks'
+import StocksContainer from '../containers/StocksContainer'
 import DateContainer from '../containers/DateContainer'
 import Trade from './Trade'
 import Portfolio from './Portfolio'
@@ -21,7 +21,7 @@ class App extends Component {
           <DateContainer />
           <div className='row medium-unstack'>
             <div className="columns small-5">
-              <Stocks />
+              <StocksContainer />
             </div>
             <div className="columns small-7">
               <Switch>
