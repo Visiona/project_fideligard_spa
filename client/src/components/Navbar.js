@@ -11,7 +11,7 @@ const Nav = ({children, routeName}) => (
 
 const Navbar = () => (
   <div>
-    <div className="top-bar" id="example-menu">
+    <div className="top-bar">
       <div className="top-bar-left">
         <h3 className='title'>Fideligard Historical Stock Portfolio Simulator</h3>
       </div>
@@ -21,7 +21,7 @@ const Navbar = () => (
             <Nav routeName='/trade'>Trade</Nav>
           </li>
           <li>
-            <Nav routeName='/transaction'>Transaction</Nav>
+            <Nav routeName='/transactions'>Transactions</Nav>
           </li>
           <li>
             <Nav routeName='/portfolio'>Portfolio</Nav>

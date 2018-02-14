@@ -7,7 +7,29 @@ h3.title {
   font-family: 'Old Standard TT', serif;
 }
 
+table {
+  font-family: 'Times', serif;
+}
+
 .menu-link {
   font-family: 'Old Standard TT', serif;
   color: #120D6A;
+  font-size: 19px;
+}
+
+.active {
+  color: #fff;
+}
+
+.dates-container {
+  margin-bottom: 40px;
+}
+
+.slider-date-right {
+  text-align: right;
+}
+
+.show-date-container {
+  text-align: right;
+  padding: 10px 50px;
 }

@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/Visiona/project_fideligard_spa#readme",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "dotenv": "^5.0.0",
     "es6-promise": "^4.2.4",
     "express": "^4.16.2",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "moment-business-days": "^1.0.6",
+    "react-rangeslider": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.14.12"

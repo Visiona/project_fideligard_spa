@@ -1,16 +1,37 @@
 import React from 'react'
+import Slider from 'react-rangeslider'
+import { convertCountToDate } from '../helpers'
 
-const DateWidget = () => (
-  <div className='row'>
-    <div  className="columns medium-2 large-3">12/6/4 columns</div>
-    <div className="columns medium-8 large-6">
-      <div className="slider" data-slider data-initial-start="50" data-end="200">
-        <span className="slider-handle"  data-slider-handle role="slider" tabindex="1"></span>
-        <span className="slider-fill" data-slider-fill></span>
-        <input type="hidden" value='100' />
-      </div>
+
+const DateWidget = ({chosenDayNumber, min, max, onInputChange}) => (
+  <div className='row dates'>
+    <div className="columns medium-6 large-6">
     </div>
-    <div className="columns medium-2 large-3"></div>
+
+    <div className="columns medium-8 large-6 large-offset-3">
+      <div className='dates-container'>
+        <div className="slider-date columns small-4 small-pull-1">
+          {convertCountToDate(min)}
+        </div>
+        <div className="columns small-4 small-push-1">
+          <b>{convertCountToDate(chosenDayNumber)}</b>
+        </div>
+        <div className="slider-date-right columns small-4 small-push-1">
+          {convertCountToDate(max)}
+        </div>
+      </div>
+
+      <Slider
+          min={min}
+          max={max}
+          step={1}
+          value={chosenDayNumber}
+          format={convertCountToDate}
+          onChange={onInputChange}
+        />
+    </div>
+    <div className="columns medium-2 large-4">
+    </div>
   </div>
 )
 
