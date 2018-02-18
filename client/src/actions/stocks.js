@@ -29,13 +29,15 @@ export function stocksFailure(error) {
 }
 
 
-export function getStocksData() {
+export function getStocksData(currentDate = '1999-11-10') {
   debugger
+  let dateParam = '?date=' + currentDate
   return (dispatch) => {
     dispatch(stocksRequest())
-
-    fetch('api/fideligard')
+    fetch('api/fideligard' + dateParam)
     .then((response) => {
+      console.log(response)
+      debugger
       if (!response.ok) {
         throw new Error(`${response.status} - ${response.statusText}`)
       }
@@ -43,9 +45,10 @@ export function getStocksData() {
       return response.json()
     })
     .then((json) => {
-      dispatch(stocksSuccess(json.data))
+      debugger
+      dispatch(stocksSuccess(json.dataset_data.data))
     })
-    .catch((error, json) => {
+    .catch((error) => {
       dispatch(stocksFailure(error))
     })
   }

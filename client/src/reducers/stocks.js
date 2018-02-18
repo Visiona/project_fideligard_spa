@@ -3,7 +3,7 @@ import { STOCKS_REQUEST,
         STOCKS_FAILURE } from '../actions/stocks'
 
 const initialState = {
-    stocks: ['APPL']
+    stocks: []
 }
 
 export function stocks(state = initialState, action) {
@@ -18,12 +18,14 @@ export function stocks(state = initialState, action) {
     case STOCKS_REQUEST:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
+        error: null
       }
     case STOCKS_FAILURE:
       return {
         ...state,
-        isFetching: false
+        isFetching: false,
+        error: action.error
       }
     default:
       return state

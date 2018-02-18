@@ -11,6 +11,10 @@ class StocksContainer extends Component {
     console.log(this.props)
   }
 
+  componentWillMount() {
+    this.props.getStocksData()
+  }
+
   // constructor(props) {
   //   super(props)
   //   this.state = {
@@ -21,11 +25,12 @@ class StocksContainer extends Component {
 
 
   render() {
-    // const {stocks} = this.props
+    const {stocks} = this.props
+    debugger
     return (
       <div>
 
-        <Stocks {...this.props}
+        <Stocks stocks={stocks}
         />
       </div>
     )
