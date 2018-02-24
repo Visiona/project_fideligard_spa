@@ -1,5 +1,6 @@
 import { CHOSEN_DAY_NUMBER } from '../actions/dates'
-import { daysFromMinToYesterday } from '../helpers'
+import { daysFromMinToYesterday,
+          convertCountToDate } from '../helpers'
 
 
 const initialState = {
@@ -14,7 +15,8 @@ export function dates(state = initialState, action) {
     case CHOSEN_DAY_NUMBER:
       return {
         ...state,
-        chosenDayNumber: action.data
+        chosenDayNumber: action.data,
+        currentDate: convertCountToDate(action.data)
       }
     default:
       return state

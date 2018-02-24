@@ -1,14 +1,17 @@
+const moment = require('moment-business-days');
 const dateFormat = require('dateformat');
 
 export function getCurrentDate(date = new Date()) {
-  return dateFormat(date, "d/ m/ yyyy");
+  let tradingDate = getTradingDay(date)
+  return dateFormat(tradingDate, "dd/mm/yyyy");
 }
 
 export function convertCountToDate(count, startDate = new Date('01/06/2012')) {
   let _MS_PER_DAY = 1000 * 60 * 60 * 24;
   let utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
   let utc2 = Math.floor(utc1 + count*_MS_PER_DAY)
-  return dateFormat(utc2, "d/ m/ yyyy");
+  let tradingDate = getTradingDay(utc2)
+  return dateFormat(tradingDate, "dd/mm/yyyy");
 }
 
 
@@ -24,4 +27,10 @@ export function daysFromMinToYesterday() {
   let max = new Date()
   let difference = dateDiffInDays(min, max) - 1
   return difference
+}
+
+function getTradingDay(date) {
+  if ( !moment(date).isBusinessDay() ) {
+    return  moment(date).nextBusinessDay()._d
+  }
 }

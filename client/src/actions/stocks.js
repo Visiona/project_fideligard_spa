@@ -46,7 +46,7 @@ export function getStocksData(currentDate = '1999-11-10') {
     })
     .then((json) => {
       debugger
-      dispatch(stocksSuccess(json.dataset_data.data))
+      dispatch(stocksSuccess(json.datatable.data))
     })
     .catch((error) => {
       dispatch(stocksFailure(error))

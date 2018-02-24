@@ -2,17 +2,21 @@ import React, { Component } from 'react'
 import Stocks from '../components/Stocks'
 import { getStocksData } from '../actions/stocks'
 import { connect } from 'react-redux'
+import { convertCountToDate } from '../helpers'
 
 class StocksContainer extends Component {
 
   componentDidMount() {
-    debugger
     this.props.getStocksData()
-    console.log(this.props)
   }
 
+
+
+
   componentWillMount() {
-    this.props.getStocksData()
+    debugger
+    console.log(this.props.date)
+    this.props.getStocksData(this.props.currentDate)
   }
 
   // constructor(props) {
@@ -30,7 +34,7 @@ class StocksContainer extends Component {
     return (
       <div>
 
-        <Stocks stocks={stocks}
+        <Stocks stocks={stocks.stocks}
         />
       </div>
     )
@@ -40,14 +44,15 @@ class StocksContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocks
+    stocks: state.stocks,
+    choosenDayNumber: state.choosenDayNumber,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getStocksData: () => {
-      dispatch(getStocksData())
+      dispatch(getStocksData(ownProps.currentDate))
     }
   }
 }
