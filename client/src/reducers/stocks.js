@@ -1,9 +1,14 @@
 import { STOCKS_REQUEST,
         STOCKS_SUCCESS,
         STOCKS_FAILURE } from '../actions/stocks'
+import { convertFourSetsIntoOne } from '../helpers'
+
 
 const initialState = {
-    stocks: []
+    currentSymbols: [], //getStockSymbols(stocksData)
+    historicDates: [], //getHistoricDates(chosenDate)
+    finalStocksSet: {}, //convertFourSetsIntoOne(stocksSets, symbols)
+    fourSetsOfStocks: []
 }
 
 export function stocks(state = initialState, action) {
@@ -12,7 +17,7 @@ export function stocks(state = initialState, action) {
         debugger
       return {
         ...state,
-        stocks: action.data,
+        finalStocksSet: convertFourSetsIntoOne(action.data),
         isFetching: false
       }
     case STOCKS_REQUEST:

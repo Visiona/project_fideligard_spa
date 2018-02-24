@@ -2,39 +2,35 @@ import React, { Component } from 'react'
 import Stocks from '../components/Stocks'
 import { getStocksData } from '../actions/stocks'
 import { connect } from 'react-redux'
-import { convertCountToDate } from '../helpers'
+import { convertCountToDate,
+          getHistoricDates,
+          convertFourSetsIntoOne } from '../helpers'
 
 class StocksContainer extends Component {
 
   componentDidMount() {
-    this.props.getStocksData()
+    // debugger
+    this.props.getStocksData(this.props.chosenDate)
   }
 
-
-
-
-  componentWillMount() {
-    debugger
-    console.log(this.props.date)
-    this.props.getStocksData(this.props.currentDate)
+  componentWillReceiveProps(nextProps) {
+    // debugger
+    if (this.props.chosenDate !== nextProps.chosenDate) {
+      this.props.getStocksData(nextProps.chosenDate)
+    }
   }
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     stocks: getStocksData()
-  //   }
-  //   debugger
-  // }
 
 
   render() {
-    const {stocks} = this.props
+    const {finalStocksSet, chosenDate} = this.props
     debugger
     return (
       <div>
 
-        <Stocks stocks={stocks.stocks}
+        <Stocks
+          stocks={finalStocksSet}
+          chosenDate={chosenDate}
         />
       </div>
     )
@@ -44,15 +40,16 @@ class StocksContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stocks: state.stocks,
-    choosenDayNumber: state.choosenDayNumber,
+    chosenDate: convertCountToDate(state.dates.chosenDayNumber),
+    finalStocksSet: state.finalStocksSet,
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getStocksData: () => {
-      dispatch(getStocksData(ownProps.currentDate))
+    getStocksData: (data) => {
+      debugger
+      dispatch(getStocksData(data))
     }
   }
 }

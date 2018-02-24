@@ -1,17 +1,24 @@
 import React from 'react'
+import { getStockSymbols,
+        priceDiff } from '../helpers'
 
-const Stocks = ({stocks}) => {
+const Stocks = ({stocks, chosenDate}) => {
+  debugger
+  if (stocks) {
+    return 'asdasd'
+  }
 
-  if (!stocks[0]) {
+  if (!!Object.keys(stocks)) {
     return null
   }
-  const stockRow = stocks.map((stock) => (
-    <tr key={stock[0]}>
-      <td>{stock[0]}</td>
-      <td>{stock[5]}</td>
-      <td>+1.45$</td>
-      <td>-2.12$</td>
-      <td>-23.34$</td>
+  let symbols = getStockSymbols(stocks)
+  const stockRow = symbols.map((sym) => (
+    <tr key={sym}>
+      <td>{sym}</td>
+      <td>{stocks[sym]['today']}</td>
+      <td>{priceDiff(stocks[sym]['today'], stocks[sym]['today'])}</td>
+      <td>{priceDiff(stocks[sym]['today'], stocks[sym]['1d'])}</td>
+      <td>-{priceDiff(stocks[sym]['today'], stocks[sym]['30d'])}</td>
       <td>trade</td>
     </tr>
   ))
@@ -19,7 +26,7 @@ const Stocks = ({stocks}) => {
 
   return (
     <div className='stock-box'>
-      <h4>Stocks------------------<b>FILTER</b></h4>
+      <h4>Stocks on {chosenDate} ------<b>FILTER</b></h4>
       <table className="hover" >
         <thead>
           <tr>
