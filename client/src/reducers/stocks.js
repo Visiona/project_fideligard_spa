@@ -1,6 +1,7 @@
 import { STOCKS_REQUEST,
         STOCKS_SUCCESS,
-        STOCKS_FAILURE } from '../actions/stocks'
+        STOCKS_FAILURE,
+        SET_FILTER } from '../actions/stocks'
 import { convertFourSetsIntoOne } from '../helpers'
 
 
@@ -30,6 +31,12 @@ export function stocks(state = initialState, action) {
         ...state,
         isFetching: false,
         error: action.error
+      }
+    case SET_FILTER:
+      return {
+        ...state,
+        currentFilter: action.data,
+        isFetching: false
       }
     default:
       return state

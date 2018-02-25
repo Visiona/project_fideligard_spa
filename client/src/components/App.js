@@ -16,14 +16,14 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='components-container'>
+        <div className='main'>
           <Navbar />
           <DateContainer />
-          <div className='row medium-unstack'>
-            <div className="columns small-5">
+          <div className='wrap row small-up-2 medium-up-2'>
+            <div className="column">
               <StocksContainer />
             </div>
-            <div className="columns small-7">
+            <div className="column ">
               <Switch>
                 <Route exact path='/trade' component={Trade} />
                 <Route exact path='/portfolio' component={Portfolio} />

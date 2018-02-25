@@ -2,6 +2,7 @@ import { getHistoricDates } from '../helpers'
 export const STOCKS_REQUEST = 'STOCKS_REQUEST'
 export const STOCKS_SUCCESS = 'STOCKS_SUCCESS'
 export const STOCKS_FAILURE = 'STOCKS_FAILURE'
+export const SET_FILTER = 'SET_FILTER'
 
 
 export function setCurrentStocks() {
@@ -29,29 +30,13 @@ export function stocksFailure(error) {
   }
 }
 
+export function setFilter(data) {
+  return {
+    type: SET_FILTER,
+    data: data
+  }
+}
 
-// export function getStocksData(currentDate = '1999-11-10') {
-//   // debugger
-//   let dateParam = '?date=' + currentDate
-//   return (dispatch) => {
-//     dispatch(stocksRequest())
-//     fetch('api/fideligard' + dateParam)
-//     .then((response) => {
-//       debugger
-//       if (!response.ok) {
-//         throw new Error(`${response.status} - ${response.statusText}`)
-//       }
-//       return response.json()
-//     })
-//     .then((json) => {
-//       debugger
-//       dispatch(stocksSuccess(json.datatable.data))
-//     })
-//     .catch((error) => {
-//       dispatch(stocksFailure(error))
-//     })
-//   }
-// }
 
 export function getStocksData(currentDate = '1999-11-10') {
   let promises = [];

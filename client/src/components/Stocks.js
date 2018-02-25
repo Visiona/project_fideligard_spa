@@ -1,16 +1,13 @@
 import React from 'react'
-import { getStockSymbols,
-        priceDiff } from '../helpers'
+import { priceDiff } from '../helpers'
+import Input from './elements/Input'
 
-const Stocks = ({stocks, chosenDate, isFetching}) => {
-  debugger
+const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange}) => {
   if (!stocks) {
     return null
   }
 
-
-  // debugger
-  let symbols = Object.keys(stocks)
+  // let symbols = Object.keys(stocks)
   const stockRow = symbols.map((sym) => (
     <tr key={sym}>
       <td>{sym}</td>
@@ -27,22 +24,27 @@ const Stocks = ({stocks, chosenDate, isFetching}) => {
   } else {
     return (
       <div className='stock-box'>
-      <h4>Stocks on {chosenDate} ------<b>FILTER</b></h4>
-      <table className="hover" >
-      <thead>
-      <tr>
-      <th width="150">Symbol</th>
-      <th>Price</th>
-      <th width="50">1d</th>
-      <th width="50">7d</th>
-      <th width="50">30d</th>
-      <th>Trade?</th>
-      </tr>
-      </thead>
-      <tbody>
-      {stockRow}
-      </tbody>
-      </table>
+        <div className="callout clearfix">
+          <h4 className='float-left'>Stocks on {chosenDate}</h4>
+          <div className='float-right'>
+            Filter: <Input onChange={onChange}  />
+          </div>
+        </div>
+        <table className="hover" >
+          <thead>
+            <tr>
+              <th width="150">Symbol</th>
+              <th>Price</th>
+              <th width="50">1d</th>
+              <th width="50">7d</th>
+              <th width="50">30d</th>
+              <th>Trade?</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stockRow}
+          </tbody>
+        </table>
       </div>
     )
   }
