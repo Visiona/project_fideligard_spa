@@ -39,7 +39,11 @@ function getTradingDay(date) {
 }
 
 export function getStockSymbols(stocksData) {
-  return Object.keys(stocksData)
+  let symbols = []
+  for(let i = 0; i < stocksData.length; i++) {
+    symbols.push(stocksData[i][0])
+  }
+  return symbols
 }
 
 export function getHistoricDates(chosenDate) {
@@ -56,15 +60,26 @@ export function convertFourSetsIntoOne(stocksSets) {
   let finalSet = {};
   for(let i = 0; i < symbols.length; i++) {
     finalSet[ symbols[i] ] = {
-      'today': stocksSets[0][ symbols[i] ] || '-',
-      '1d': stocksSets[1][ symbols[i] ] || '-',
-      '7d': stocksSets[2][ symbols[i] ] || '-',
-      '30d': stocksSets[3][ symbols[i] ] || '-'
+      'today': getStockPriceFromSets(stocksSets[0], symbols[i]) || '-',
+      '1d': getStockPriceFromSets(stocksSets[1], symbols[i]) || '-',
+      '7d': getStockPriceFromSets(stocksSets[2], symbols[i]) || '-',
+      '30d': getStockPriceFromSets(stocksSets[3], symbols[i]) || '-'
     }
   }
   return finalSet
 }
 
+function getStockPriceFromSets(array, sym) {
+  for(let i = 0; i < array.length; i++) {
+    if (array[i][0] === sym) {
+      return array[i][5].toFixed(2)
+    }
+  }
+}
+
+
 export function priceDiff(a, b) {
-  return parseInt(b) - parseInt(a)
+  let diff = parseFloat(b) - parseFloat(a)
+  diff > 0 ? diff = `+${diff.toFixed(2)}` : diff = diff.toFixed(2)
+  return diff
 }

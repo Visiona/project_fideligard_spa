@@ -14,7 +14,6 @@ const initialState = {
 export function stocks(state = initialState, action) {
   switch(action.type) {
     case STOCKS_SUCCESS:
-        debugger
       return {
         ...state,
         finalStocksSet: convertFourSetsIntoOne(action.data),

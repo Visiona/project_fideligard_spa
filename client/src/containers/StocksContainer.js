@@ -9,28 +9,24 @@ import { convertCountToDate,
 class StocksContainer extends Component {
 
   componentDidMount() {
-    // debugger
     this.props.getStocksData(this.props.chosenDate)
   }
 
   componentWillReceiveProps(nextProps) {
-    // debugger
     if (this.props.chosenDate !== nextProps.chosenDate) {
       this.props.getStocksData(nextProps.chosenDate)
     }
   }
 
 
-
   render() {
-    const {finalStocksSet, chosenDate} = this.props
-    debugger
+    const {stocks, chosenDate, isFetching} = this.props
     return (
       <div>
-
         <Stocks
-          stocks={finalStocksSet}
+          stocks={stocks}
           chosenDate={chosenDate}
+          isFetching={isFetching}
         />
       </div>
     )
@@ -41,14 +37,14 @@ class StocksContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     chosenDate: convertCountToDate(state.dates.chosenDayNumber),
-    finalStocksSet: state.finalStocksSet,
+    stocks: state.stocks.finalStocksSet,
+    isFetching: state.stocks.isFetching
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getStocksData: (data) => {
-      debugger
       dispatch(getStocksData(data))
     }
   }
