@@ -1,6 +1,12 @@
 import React from 'react'
 import { priceDiff } from '../helpers'
+import {Link} from 'react-router-dom'
 import Input from './elements/Input'
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom'
+
 
 const SortSign = ({sortType}) => {
   const classNames = `fi-arrow-${sortType} size-18`
@@ -10,18 +16,20 @@ const SortSign = ({sortType}) => {
   )
 }
 
-  // let sortSign = <i className="fi-arrow-right size-18">
-  // if (sortType == 'down') {
-  //   sortSign = <i className="fi-arrow-up size-18">
-  // } else if (sortType == 'up') {
-  //   sortSign = <i className="fi-arrow-down size-18">
-  // }
+const LinkTrade = ({children, pathname, price, symbol, date}) => {
+  debugger
+  return (
+  <Link to={`/trade/${symbol}`}>
+    {children}
+  </Link>
+  )
+}
 
 const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sortType}) => {
   if (!stocks) {
     return null
   }
-
+  debugger
   // let symbols = Object.keys(stocks)
   const stockRow = symbols.map((sym) => (
     <tr key={sym}>
@@ -30,11 +38,11 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sor
       <td>${priceDiff(stocks[sym]['today'], stocks[sym]['1d'])}</td>
       <td>${priceDiff(stocks[sym]['today'], stocks[sym]['7d'])}</td>
       <td>${priceDiff(stocks[sym]['today'], stocks[sym]['30d'])}</td>
-      <td>trade</td>
+      <td><LinkTrade children='trade' pathname='/trade' price={stocks[sym]['today']} symbol={sym} date={chosenDate} /></td>
     </tr>
   ))
 
-
+      // <td><LinkTrade children='trade' pathname='/trade' price={stocks[sym]['today']} symbol={sym} date={chosenDate} /></td>
 
   if (isFetching) {
     return <h4>Loading Stocks Data ... </h4>

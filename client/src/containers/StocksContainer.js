@@ -6,6 +6,7 @@ import { convertCountToDate,
           getHistoricDates,
           convertFourSetsIntoOne } from '../helpers'
 
+
 class StocksContainer extends Component {
 
   componentDidMount() {
@@ -82,7 +83,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onClick: (e) => {
       e.preventDefault();
-      debugger
       dispatch(setSort(e.target.getAttribute('data-sort-type')))
     }
   }

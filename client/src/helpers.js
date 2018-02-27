@@ -83,8 +83,3 @@ export function priceDiff(a, b) {
   diff > 0 ? diff = `+${diff.toFixed(2)}` : diff = diff.toFixed(2)
   return diff
 }
-
-// 
-// export function changeSortMode(sortType) {
-//   sortType == 'up' || 'right' ? 'down' : 'up'
-// }

@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import Navbar from './Navbar'
 import StocksContainer from '../containers/StocksContainer'
 import DateContainer from '../containers/DateContainer'
-import Trade from './Trade'
+import TradeContainer from '../containers/TradeContainer'
 import Portfolio from './Portfolio'
 import Transactions from './Transactions'
 
@@ -25,7 +25,7 @@ class App extends Component {
             </div>
             <div className="column ">
               <Switch>
-                <Route exact path='/trade' component={Trade} />
+                <Route exact path='/trade/:ticker' component={TradeContainer} />
                 <Route exact path='/portfolio' component={Portfolio} />
                 <Route exact path='/transactions' component={Transactions} />
               </Switch>
