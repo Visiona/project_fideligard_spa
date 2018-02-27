@@ -2,7 +2,22 @@ import React from 'react'
 import { priceDiff } from '../helpers'
 import Input from './elements/Input'
 
-const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange}) => {
+const SortSign = ({sortType}) => {
+  const classNames = `fi-arrow-${sortType} size-18`
+
+  return (
+    <i className={classNames} data-sort-type={sortType}></i>
+  )
+}
+
+  // let sortSign = <i className="fi-arrow-right size-18">
+  // if (sortType == 'down') {
+  //   sortSign = <i className="fi-arrow-up size-18">
+  // } else if (sortType == 'up') {
+  //   sortSign = <i className="fi-arrow-down size-18">
+  // }
+
+const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sortType}) => {
   if (!stocks) {
     return null
   }
@@ -19,6 +34,8 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange}) => {
     </tr>
   ))
 
+
+
   if (isFetching) {
     return <h4>Loading Stocks Data ... </h4>
   } else {
@@ -33,7 +50,9 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange}) => {
         <table className="hover" >
           <thead>
             <tr>
-              <th width="150">Symbol</th>
+              <th width="150">
+                Symbol <a onClick={onClick} ><SortSign sortType={sortType} /></a>
+              </th>
               <th>Price</th>
               <th width="50">1d</th>
               <th width="50">7d</th>

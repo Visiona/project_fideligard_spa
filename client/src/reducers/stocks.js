@@ -1,7 +1,8 @@
 import { STOCKS_REQUEST,
         STOCKS_SUCCESS,
         STOCKS_FAILURE,
-        SET_FILTER } from '../actions/stocks'
+        SET_FILTER,
+        SET_SORT } from '../actions/stocks'
 import { convertFourSetsIntoOne } from '../helpers'
 
 
@@ -9,7 +10,8 @@ const initialState = {
     currentSymbols: [], //getStockSymbols(stocksData)
     historicDates: [], //getHistoricDates(chosenDate)
     finalStocksSet: {}, //convertFourSetsIntoOne(stocksSets, symbols)
-    fourSetsOfStocks: []
+    fourSetsOfStocks: [],
+    sortType: 'right'
 }
 
 export function stocks(state = initialState, action) {
@@ -18,7 +20,8 @@ export function stocks(state = initialState, action) {
       return {
         ...state,
         finalStocksSet: convertFourSetsIntoOne(action.data),
-        isFetching: false
+        isFetching: false,
+        sortType: 'right'
       }
     case STOCKS_REQUEST:
       return {
@@ -36,6 +39,13 @@ export function stocks(state = initialState, action) {
       return {
         ...state,
         currentFilter: action.data,
+        isFetching: false,
+        sortType: 'right'
+      }
+    case SET_SORT:
+      return {
+        ...state,
+        sortType: action.data === 'up' ? 'down' : 'up',
         isFetching: false
       }
     default:

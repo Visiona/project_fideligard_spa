@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Stocks from '../components/Stocks'
-import { getStocksData, setFilter } from '../actions/stocks'
+import { getStocksData, setFilter, setSort } from '../actions/stocks'
 import { connect } from 'react-redux'
 import { convertCountToDate,
           getHistoricDates,
@@ -20,7 +20,7 @@ class StocksContainer extends Component {
 
 
   render() {
-    const {stocks, symbols, chosenDate, isFetching, onChange} = this.props
+    const {stocks, symbols, chosenDate, isFetching, onChange, onClick, sortType} = this.props
     return (
       <div>
         <Stocks
@@ -29,20 +29,34 @@ class StocksContainer extends Component {
           isFetching={isFetching}
           symbols={symbols}
           onChange={onChange}
+          onClick={onClick}
+          sortType={sortType}
         />
       </div>
     )
   }
 }
 
-function filterStocks(stocks, currentFilter) {
+function filterStocks(stocks, currentFilter, sortType) {
   let symbols = Object.keys(stocks)
   if (!currentFilter) {
-    return symbols
+    return sortStocks(symbols, sortType)
   }
 
   let patt = new RegExp('^' + currentFilter.toUpperCase())
-  return symbols.filter((name) => patt.test(name))
+  let filteredSymbols = symbols.filter((name) => patt.test(name))
+  return sortStocks(filteredSymbols, sortType)
+}
+
+function sortStocks(symbols, sortType) {
+  // debugger
+  if (sortType === 'right') {
+    return symbols
+  } else if (sortType === 'up') {
+    return symbols.sort()
+  } else if (sortType === 'down') {
+    return symbols.reverse()
+  }
 }
 
 
@@ -52,18 +66,24 @@ const mapStateToProps = (state) => {
     stocks: state.stocks.finalStocksSet,
     isFetching: state.stocks.isFetching,
     currentFilter: state.stocks.currentFilter,
-    symbols: filterStocks(state.stocks.finalStocksSet, state.stocks.currentFilter)
+    symbols: filterStocks(state.stocks.finalStocksSet, state.stocks.currentFilter, state.stocks.sortType),
+    sortType: state.stocks.sortType
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  debugger
+  // debugger
   return {
     getStocksData: (data) => {
       dispatch(getStocksData(data))
     },
     onChange: (e) => {
       dispatch(setFilter(e.target.value))
+    },
+    onClick: (e) => {
+      e.preventDefault();
+      debugger
+      dispatch(setSort(e.target.getAttribute('data-sort-type')))
     }
   }
 }

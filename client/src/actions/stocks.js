@@ -3,7 +3,7 @@ export const STOCKS_REQUEST = 'STOCKS_REQUEST'
 export const STOCKS_SUCCESS = 'STOCKS_SUCCESS'
 export const STOCKS_FAILURE = 'STOCKS_FAILURE'
 export const SET_FILTER = 'SET_FILTER'
-
+export const SET_SORT = 'SET_SORT'
 
 export function setCurrentStocks() {
 
@@ -33,6 +33,13 @@ export function stocksFailure(error) {
 export function setFilter(data) {
   return {
     type: SET_FILTER,
+    data: data
+  }
+}
+
+export function setSort(data) {
+  return {
+    type: SET_SORT,
     data: data
   }
 }
