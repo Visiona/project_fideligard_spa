@@ -14,6 +14,7 @@ class StocksContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger
     if (this.props.chosenDate !== nextProps.chosenDate) {
       this.props.getStocksData(nextProps.chosenDate)
     }

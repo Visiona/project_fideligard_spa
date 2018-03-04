@@ -7,13 +7,15 @@ const QUANDL_API_KEY = process.env.QUANDL_API_KEY
 const baseUrl = 'https://www.quandl.com/api/v3/datatables/WIKI/PRICES'
 
 
-app.set('port', (process.env.PORT || 3001))
+app.set('port', 3001)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
 
 app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   res.setHeader('charset', 'utf-8')
   next()
 })
@@ -33,7 +35,7 @@ function parseJSON(response) {
   return response.json()
 }
 
-app.get('/api/fideligard', (req, res, next) => {
+app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
   console.log('Requesting Stock Data from Quandl...')
   debugger
   const dateParam = req.query.date

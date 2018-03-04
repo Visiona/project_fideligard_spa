@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
+  Redirect,
   Navlink,
   Switch } from 'react-router-dom'
 import ReactDOM from 'react-dom';
@@ -13,6 +14,16 @@ import Portfolio from './Portfolio'
 import Transactions from './Transactions'
 
 class App extends Component {
+
+
+  // <Route exact path='/trade/:ticker' component={TradeContainer} />
+  // <Route path="/protected-page" render={() => (
+  //   this.state.stocks.finalStocksSet[0] ?
+  //     <Route exact path='/trade/:ticker' component={TradeContainer} /> :
+  //     <Route exact path='/trade/:ticker' component={TradeContainer} />
+  // )} />
+
+
   render() {
     return (
       <Router>

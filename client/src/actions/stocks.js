@@ -47,13 +47,15 @@ export function setSort(data) {
 
 export function getStocksData(currentDate = '1999-11-10') {
   let promises = [];
-  const apiURL = 'api/fideligard';
+  const apiURL = 'http://localhost:3001/api/fideligard'
+  // const apiURL = 'api/fideligard';
   let historicDates = getHistoricDates(currentDate);
   debugger
   return (dispatch) => {
     dispatch(stocksRequest())
     for(let i=0; i< historicDates.length; i++) {
       let dateParam = '?date=' + historicDates[i]
+      debugger
       promises.push(
         fetch(apiURL + dateParam)
         .then(response => {

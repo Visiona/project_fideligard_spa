@@ -17,7 +17,6 @@ const SortSign = ({sortType}) => {
 }
 
 const LinkTrade = ({children, pathname, price, symbol, date}) => {
-  debugger
   return (
   <Link to={`/trade/${symbol}`}>
     {children}
@@ -29,7 +28,6 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sor
   if (!stocks) {
     return null
   }
-  debugger
   // let symbols = Object.keys(stocks)
   const stockRow = symbols.map((sym) => (
     <tr key={sym}>

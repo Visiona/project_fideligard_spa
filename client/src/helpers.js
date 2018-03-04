@@ -15,6 +15,14 @@ export function convertCountToDate(count, startDate = new Date('01/06/2012')) {
   return dateFormat(tradingDate, "yyyy/mm/dd");
 }
 
+export function convertDateToCount(myDate, startDate = new Date('01/06/2012')) {
+  let currentDate = new Date(myDate)
+  let _MS_PER_DAY = 1000 * 60 * 60 * 24;
+  let utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+  let utc2 = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+  return Math.floor( (utc2- utc1)/_MS_PER_DAY )
+}
+
 
 export function dateDiffInDays(a, b) {
   let _MS_PER_DAY = 1000 * 60 * 60 * 24;

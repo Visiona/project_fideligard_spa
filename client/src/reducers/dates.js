@@ -11,6 +11,7 @@ const initialState = {
 }
 
 export function dates(state = initialState, action) {
+  debugger
   switch(action.type) {
     case CHOSEN_DAY_NUMBER:
       return {

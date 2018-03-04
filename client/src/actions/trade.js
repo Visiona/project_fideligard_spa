@@ -1,26 +1,18 @@
+export const UPDATE_SYMBOL = 'UPDATE_SYMBOL'
 export const UPDATE_FORM = 'UPDATE_FORM'
-// export const STOCKS_SUCCESS = 'STOCKS_SUCCESS'
-// export const STOCKS_FAILURE = 'STOCKS_FAILURE'
-//
-//
-export function updateForm(data) {
+
+
+export function updateSymbol(data) {
   return {
-    type: UDPATE_FORM,
+    type: UPDATE_SYMBOL,
     data: data
   }
 }
-//
-// export function stocksSuccess(data) {
-//   return {
-//     type: STOCKS_SUCCESS,
-//     data: data
-//   }
-//
-// }
-//
-// export function stocksFailure(error) {
-//   return {
-//     type: STOCKS_FAILURE,
-//     data: error
-//   }
-// }
+
+export function updateForm(data) {
+  debugger
+  return {
+    type: UPDATE_FORM,
+    data: data
+  }
+}
