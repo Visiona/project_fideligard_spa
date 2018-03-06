@@ -14,7 +14,6 @@ class StocksContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
     if (this.props.chosenDate !== nextProps.chosenDate) {
       this.props.getStocksData(nextProps.chosenDate)
     }
@@ -51,7 +50,6 @@ function filterStocks(stocks, currentFilter, sortType) {
 }
 
 function sortStocks(symbols, sortType) {
-  // debugger
   if (sortType === 'right') {
     return symbols
   } else if (sortType === 'up') {

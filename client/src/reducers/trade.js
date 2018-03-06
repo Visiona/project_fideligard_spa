@@ -1,15 +1,16 @@
 import { UPDATE_FORM,
-        UPDATE_SYMBOL } from '../actions/trade'
+        UPDATE_SYMBOL,
+        UPDATE_FORM_STATUS} from '../actions/trade'
 
 
 const initialState = {
     chosenDate: '',
     symbol: '',
     price: '',
-    quantity: '',
+    quantity: 0,
     symbols: [],
-    formState: 'EMPTY',
-    orderType: ''
+    isFormCompleted: false,
+    orderType: 'BUY'
 }
 
 export function trade(state = initialState, action) {
@@ -19,13 +20,17 @@ export function trade(state = initialState, action) {
         ...state,
         symbol: action.data
       }
+    case UPDATE_FORM_STATUS:
+      return {
+        ...state,
+        isFormCompleted: action.data
+      }
     case UPDATE_FORM:
       return {
         ...state,
         symbol: action.data.symbol || '',
         price: action.data.price || 0,
         quantity: action.data.quantity || 0,
-        formState: 'FULL' ? action.data.symbol && action.data.price && action.data.quantity : 'EMPTY',
         orderType: action.data.buysell
       }
     default:

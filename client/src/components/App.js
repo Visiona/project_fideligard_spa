@@ -10,8 +10,8 @@ import Navbar from './Navbar'
 import StocksContainer from '../containers/StocksContainer'
 import DateContainer from '../containers/DateContainer'
 import TradeContainer from '../containers/TradeContainer'
-import Portfolio from './Portfolio'
-import Transactions from './Transactions'
+import PortfolioContainer from '../containers/PortfolioContainer'
+import TransactionsContainer from '../containers/TransactionsContainer'
 
 class App extends Component {
 
@@ -36,9 +36,10 @@ class App extends Component {
             </div>
             <div className="column ">
               <Switch>
-                <Route exact path='/trade/:ticker' component={TradeContainer} />
-                <Route exact path='/portfolio' component={Portfolio} />
-                <Route exact path='/transactions' component={Transactions} />
+                <Route exact path='/trade/:ticker?' component={TradeContainer} />
+                <Route exact path='/portfolio' component={PortfolioContainer} />
+                <Route exact path='/transactions' component={TransactionsContainer} />
+                <Route exact path='/transactions/success' render={() => <h1>Transaction was successfull</h1>} component={TransactionsContainer} />
               </Switch>
             </div>
           </div>

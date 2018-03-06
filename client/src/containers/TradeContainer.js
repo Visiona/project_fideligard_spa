@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import Trade from '../components/Trade'
 import { connect } from 'react-redux'
 import { convertDateToCount } from '../helpers'
-import { updateForm, updateSymbol } from '../actions/trade'
+import { updateForm, updateSymbol, updateFormStatus} from '../actions/trade'
 import { getStocksData } from '../actions/stocks'
 import { setCurrentDate } from '../actions/dates'
+import { createTransaction } from '../actions/transactions'
+import { updateBalance } from '../actions/portfolio'
 import serialize from 'form-serialize'
 const dateFormat = require('dateformat');
 
@@ -16,14 +18,6 @@ function getStockPrice(stocks, symbol) {
   return stocks[symbol]['today']
 }
 
-// function prevSymbolIfNonExist(stocks, props, symbol) {
-//   debugger
-//   if (!stocks[symbol]) {
-//     return props.location.pathname.split('/')[2] || props
-//   }
-//   return symbol
-// }
-
 
 class TradeContainer extends Component {
 
@@ -33,7 +27,7 @@ class TradeContainer extends Component {
   }
 
   render() {
-    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, orderType} = this.props
+    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, orderType, isFormCompleted, updateFormStatus} = this.props
 
     return (
       <div>
@@ -48,8 +42,9 @@ class TradeContainer extends Component {
           onChangeDate={onChangeDate}
           onChangeSymbol={onChangeSymbol}
           onSubmit={onSubmit}
-          formIsHalfFilled={formState}
+          isFormCompleted={isFormCompleted}
           orderType={orderType}
+          updateFormStatus={updateFormStatus}
         />
       </div>
     )
@@ -58,24 +53,18 @@ class TradeContainer extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   let ticker = ownProps.match.params.ticker
   return {
     chosenDateCount: state.dates.chosenDayNumber,
-    // symbol: prevSymbolIfNonExist(state.stocks.finalStocksSet, ownProps, ticker),
     symbol: ticker,
     price: getStockPrice(state.stocks.finalStocksSet, ticker),
     quantity: state.trade.quantity || 0,
-    accBalance: 10000, //state.portfolio.balance
-    formState: state.trade.formState,
+    accBalance: state.portfolio.accBalance,
+    isFormCompleted: state.trade.isFormCompleted,
     orderType: state.trade.orderType
 
   }
 }
-// quantity: e.target.quantity,
-// buysell: e.target.buysell,
-// symbol: state.symbol,
-// price: state.price
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
@@ -87,16 +76,33 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(setCurrentDate(dateCount))
     },
     onChangeSymbol: (e) => {
-      debugger
       props.history.push(`/trade/${e.target.value}`)
       dispatch(updateSymbol(e.target.value))
     },
     onSubmit: (e) => {
-      e.preventDefault()
+      debugger
+
       const form = e.target
       const data = serialize(form, {hash: true})
-      // dispatch(updatePortfolio(data))
-      form.reset()
+      if (!isNaN(data.price*data.quantity)) {
+        debugger
+        dispatch(updateFormStatus(true))
+        dispatch(createTransaction(data))
+        dispatch(updateBalance(data.price*data.quantity))
+        dispatch(updateForm({
+          chosenDate: '',
+          symbol: '',
+          price: '',
+          quantity: 0,
+          symbols: []
+        }))
+        props.history.push(`/transactions/success`)
+      } else {
+        props.history.push(`/trade/${data.symbol}`)
+      }
+    },
+    updateFormStatus: (e) => {
+      dispatch(updateFormStatus(true))
     }
   }
 }

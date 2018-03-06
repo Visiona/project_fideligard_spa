@@ -6,14 +6,14 @@ import { convertCountToDate } from '../helpers'
 const dateFormat = require('dateformat')
 
 
-const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, formIsHalfFilled, orderType}) => {
+const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, orderType, updateFormStatus}) => {
   let currentDate = convertCountToDate(chosenDateCount)
   const formattedDate = dateFormat(currentDate, "yyyy-mm-dd")
-  let cost = price*quantity || 0
+  let cost = (price*quantity).toFixed(2) || 0
   const isCapitalTooLow = cost > accBalance
   const haveEnoughStocks = true //UPDATE when create portfolio!!!!
   accBalance = isCapitalTooLow ? accBalance : accBalance - cost
-  let orderStatus = (!isCapitalTooLow && orderType === 'BUY') || (haveEnoughStocks && orderType === 'SELL')
+  let orderStatus = (quantity > 0 && !isCapitalTooLow && orderType === 'BUY') || (haveEnoughStocks && orderType === 'SELL')
 
    function validateSubmission(e) {
       // e.preventDefault()
@@ -21,44 +21,28 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
         return alert("There is no such a ticker. Try again!")
       }
       if (isCapitalTooLow && orderType === 'BUY') {
-        return alert('Sorry, you don\'t have enough money to buy those shares.')
+        return alert('You don\'t have enough money to buy these shares.')
       }
       if (!haveEnoughStocks && orderType === 'SELL') {
-        return alert('Sorry, you don\'t have that many stocks')
+        return alert('You don\'t have enough stocks to do this operation.')
       }
       if (quantity > 0) {
+        debugger
         onSubmit(e)
       }
     }
 
 
-
-
-  debugger
   return (
   <div className='trade-box'>
 
-    <Prompt
-      when={price === 'error'}
-      message="There is no such a ticker. Try again!"
-    />
     <h4>Trade</h4>
-
-    <Prompt
-      when={isCapitalTooLow}
-      message="You can't sell more than you won"
-    />
-
-    <Prompt
-      when={haveEnoughStocks}
-      message="You do not have enough capital to make this purchase"
-    />
 
 
     <div className="row">
       <div className="columns small-6">
 
-        <form>
+        <form onSubmit={validateSubmission}>
           <div className="grid-x grid-padding-x">
             <div className="small-3 cell">
               <label htmlFor="symbol" className="text-right middle">Symbol</label>
@@ -104,6 +88,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
             </div>
             <div className="small-9 cell">
               <h5 data-name='price'>{price}</h5>
+              <input type="price" name="price" value={price} hidden/>
             </div>
           </div>
 
@@ -112,12 +97,12 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
               <label htmlFor="cost" className="text-right middle">Cost</label>
             </div>
             <div className="small-9 cell">
-              <h5 data-name='cost' onChange={onChange}>{Math.round(cost).toFixed(2)}</h5>
+              <h5 data-name='cost' onChange={onChange}>{cost}</h5>
             </div>
           </div>
 
           <div className="input-group-button">
-            <input type="submit" className="button" value="Place Order" onSubmit={validateSubmission}
+            <input type="submit" className="button" value="Place Order" onClick={updateFormStatus}
             />
           </div>
         </form>
@@ -133,11 +118,9 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
 
       </div>
       <Prompt
-        when={formIsHalfFilled === 'EMPTY'}
+        when={isFormCompleted}
         message="You are in the middle of trading process, are you sure you want to quit?"
       />
-
-
 
     </div>
   </div>

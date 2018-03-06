@@ -15,7 +15,6 @@ const initialState = {
 }
 
 export function stocks(state = initialState, action) {
-  debugger
   switch(action.type) {
     case STOCKS_SUCCESS:
       return {
