@@ -4,7 +4,9 @@ import LinkTrade from './elements/LinkTrade'
 
 const Portfolio = ({availableCash, portfolioStocks, onClick, onSymbolSort, sortSymbolType}) => {
 
-
+  // const totalCost = (portfolioStocks, price) => {
+  //   portfolioStocks
+  // }
   const currentFinances = (
     <tr>
       <td>AAPL</td>
@@ -17,20 +19,21 @@ const Portfolio = ({availableCash, portfolioStocks, onClick, onSymbolSort, sortS
   )
 
   // <td><LinkTrade children='trade' pathname='/trade' price={stocks[sym]['today']} symbol={sym} date={chosenDate} /></td>
-  const currentPortfolio = (
+  const currentPortfolio = portfolioStocks.map((p) => (
     <tr>
-      <td>APPL</td>
-      <td>123,456$</td>
-      <td>123,456$</td>
-      <td>123,456$</td>
-      <td>0.0$</td>
-      <td>0.0$</td>
+      <td>{p.symbol}</td>
+      <td>{p.quantity}</td>
+      <td>{p.quantity*p.price}</td>
+      <td>TBC</td>
+      <td>TBC</td>
+      <td>TBC</td>
       <td>0.0$</td>
       <td>0.0$</td>
       <td>0.0$</td>
       <td>trade</td>
     </tr>
-  )
+
+  ))
 
   return (
           <div className='stock-box'>

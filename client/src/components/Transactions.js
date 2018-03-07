@@ -12,8 +12,9 @@ const Transactions = ({transactions, onDateSort, onSymbolSort, onFilter, sortDat
   //       <td>321.32</td>
   //     </tr>
   //   )
+  debugger
     let transactionRow = transactions.map((t) => (
-      <tr key={t.ref}>
+      <tr key={t.id}>
         <td>{t.chosenDate}</td>
         <td>{t.symbol}</td>
         <td>{t.buysell}</td>

@@ -15,15 +15,16 @@ const initialState = {
   sortDateType: 'right',
   sortSymbolType: 'right',
   currentFilter: '',
-  all: []
+  history: []
 }
 
 export function transactions(state = initialState, action) {
   switch(action.type) {
     case CREATE_TRANSACTION:
+      debugger
       return {
         ...state,
-        all: [...state, action.data]
+        history: [...state.history, action.data]
       }
     case SET_FILTER:
       return {

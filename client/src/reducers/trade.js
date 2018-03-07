@@ -9,7 +9,7 @@ const initialState = {
     price: '',
     quantity: 0,
     symbols: [],
-    isFormCompleted: false,
+    isFormCompleted: true,
     orderType: 'BUY'
 }
 
@@ -21,6 +21,7 @@ export function trade(state = initialState, action) {
         symbol: action.data
       }
     case UPDATE_FORM_STATUS:
+    debugger
       return {
         ...state,
         isFormCompleted: action.data

@@ -6,24 +6,25 @@ import { convertCountToDate } from '../helpers'
 const dateFormat = require('dateformat')
 
 
-const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, orderType, updateFormStatus}) => {
+const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, buysell, updateFormStatus}) => {
   let currentDate = convertCountToDate(chosenDateCount)
   const formattedDate = dateFormat(currentDate, "yyyy-mm-dd")
   let cost = (price*quantity).toFixed(2) || 0
+  debugger
   const isCapitalTooLow = cost > accBalance
   const haveEnoughStocks = true //UPDATE when create portfolio!!!!
   accBalance = isCapitalTooLow ? accBalance : accBalance - cost
-  let orderStatus = (quantity > 0 && !isCapitalTooLow && orderType === 'BUY') || (haveEnoughStocks && orderType === 'SELL')
+  let orderStatus = (quantity > 0 && !isCapitalTooLow && buysell === 'BUY') || (haveEnoughStocks && buysell === 'SELL')
 
    function validateSubmission(e) {
       // e.preventDefault()
       if (isNaN(price)) {
         return alert("There is no such a ticker. Try again!")
       }
-      if (isCapitalTooLow && orderType === 'BUY') {
+      if (isCapitalTooLow && buysell === 'BUY') {
         return alert('You don\'t have enough money to buy these shares.')
       }
-      if (!haveEnoughStocks && orderType === 'SELL') {
+      if (!haveEnoughStocks && buysell === 'SELL') {
         return alert('You don\'t have enough stocks to do this operation.')
       }
       if (quantity > 0) {
@@ -118,8 +119,9 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
 
       </div>
       <Prompt
-        when={isFormCompleted}
-        message="You are in the middle of trading process, are you sure you want to quit?"
+        when={!isFormCompleted}
+        message={location =>
+            "You are in the middle of trading process, are you sure you want to quit?"}
       />
 
     </div>

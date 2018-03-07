@@ -24,13 +24,55 @@ const initialState = {
 
 }
 
+// if I bought new stocks - add transactions to porfolio
+// if (action.data.buysell === 'BUY') {
+//   return {
+//     ...state,
+//     orders: [...state.orders, action.data]
+//   }
+// } else {
+//   return {
+//     ...state,
+//     orders:   state.orders.map((order) => {
+//         if (order.symbol === action.data.symbol) {
+//           if (order.quantity === action.data.quantity) {
+//             return null
+//           } else {
+//             order.quantity = order.quantity - action.data.quantity
+//           }
+//         }
+//       })
+//     }
+// }
+// If I sold stocks, reduce or remove the quantity/stocks form portfolio & update balance
+
 export function portfolio(state = initialState, action) {
   switch(action.type) {
     case UPDATE_PORTFOLIO:
+    debugger
+    if (action.data.buysell === 'BUY') {
       return {
         ...state,
-        orders: '' //cerate function which nullifies buys and sell transactions
+        orders: [...state.orders, action.data]
       }
+    } else {
+      return {
+        ...state,
+        orders:   state.orders.map((order) => {
+            if (order.symbol === action.data.symbol) {
+              if (order.quantity === action.data.quantity) {
+                return null
+              } else {
+                order.quantity = order.quantity - action.data.quantity
+              }
+            }
+          })
+        }
+    }
+      // return {
+      //   ...state,
+      //   orders: '' //cerate function which nullifies buys and sell transactions
+      // }
     case UPDATE_BALANCE:
       return {
         ...state,

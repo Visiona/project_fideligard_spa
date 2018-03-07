@@ -6,7 +6,7 @@ import { updateForm, updateSymbol, updateFormStatus} from '../actions/trade'
 import { getStocksData } from '../actions/stocks'
 import { setCurrentDate } from '../actions/dates'
 import { createTransaction } from '../actions/transactions'
-import { updateBalance } from '../actions/portfolio'
+import { updateBalance, updatePortfolio } from '../actions/portfolio'
 import serialize from 'form-serialize'
 const dateFormat = require('dateformat');
 
@@ -27,7 +27,7 @@ class TradeContainer extends Component {
   }
 
   render() {
-    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, orderType, isFormCompleted, updateFormStatus} = this.props
+    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, buysell, isFormCompleted, updateFormStatus} = this.props
 
     return (
       <div>
@@ -43,7 +43,7 @@ class TradeContainer extends Component {
           onChangeSymbol={onChangeSymbol}
           onSubmit={onSubmit}
           isFormCompleted={isFormCompleted}
-          orderType={orderType}
+          buysell={buysell}
           updateFormStatus={updateFormStatus}
         />
       </div>
@@ -61,7 +61,7 @@ const mapStateToProps = (state, ownProps) => {
     quantity: state.trade.quantity || 0,
     accBalance: state.portfolio.accBalance,
     isFormCompleted: state.trade.isFormCompleted,
-    orderType: state.trade.orderType
+    buysell: state.trade.orderType
 
   }
 }
@@ -70,6 +70,9 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onChange: (e) => {
       dispatch(updateForm({[e.target.name]: e.target.value}))
+      if(e.target.name === 'quantity') {
+        dispatch(updateFormStatus(false))
+      }
     },
     onChangeDate: (e) => {
       let dateCount = convertDateToCount(e.target.value)
@@ -80,14 +83,17 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(updateSymbol(e.target.value))
     },
     onSubmit: (e) => {
+      e.preventDefault();
       debugger
 
       const form = e.target
       const data = serialize(form, {hash: true})
       if (!isNaN(data.price*data.quantity)) {
         debugger
-        dispatch(updateFormStatus(true))
+        e.target.reset();
+        dispatch(updateFormStatus(!data.quantity))
         dispatch(createTransaction(data))
+        dispatch(updatePortfolio(data))
         dispatch(updateBalance(data.price*data.quantity))
         dispatch(updateForm({
           chosenDate: '',

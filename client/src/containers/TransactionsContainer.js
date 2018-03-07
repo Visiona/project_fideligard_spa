@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { setSortByDate, setSortBySymbol, setFilter} from '../actions/transactions'
 
 
-function filterTransactions(stocks, currentFilter, sortType) {
+function filterTransactions(transactions, currentFilter, sortType) {
   // let symbols = Object.keys(stocks)
   // if (!currentFilter) {
   //   return sortStocks(symbols, sortType)
@@ -15,14 +15,22 @@ function filterTransactions(stocks, currentFilter, sortType) {
   // return sortStocks(filteredSymbols, sortType)
 }
 
-function sortByDate(symbols, sortType) {
-  // if (sortType === 'right') {
-  //   return symbols
-  // } else if (sortType === 'up') {
-  //   return symbols.sort()
-  // } else if (sortType === 'down') {
-  //   return symbols.reverse()
-  // }
+function compare(a,b, type) {
+  if (a[type] < b[type])
+    return -1;
+  if (a[type] > b[type])
+    return 1;
+  return 0;
+}
+
+function sortByDate(transactions, sortType) {
+  if (sortType === 'right') {
+    return transactions
+  } else if (sortType === 'up') {
+    return transactions.sort(compare)
+  } else if (sortType === 'down') {
+    return transactions.reverse(compare)
+  }
 }
 
 function sortBySymbol(symbols, sortType) {
@@ -60,9 +68,9 @@ class TransactionsContainer extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-
+  debugger
   return {
-  transactions: state.transactions.all,
+  transactions: state.transactions.history,
   sortSymbolType: state.transactions.sortSymbolType,
   sortDateType: state.transactions.sortDateType
   }
