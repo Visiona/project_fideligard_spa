@@ -2,18 +2,6 @@ import { UPDATE_PORTFOLIO,
         UPDATE_BALANCE} from '../actions/portfolio'
 
 
-// transactions = {
-//   symbol: '',
-//   date: '',
-//   type: '',
-//   quantity: '',
-//   price: '',
-//   sortName: '',
-//   sortType: 'right',
-//   currentFilter: '',
-//   all: []
-// }
-
 const initialState = {
   // totalCost: 0,
   // profitLoss: 0,

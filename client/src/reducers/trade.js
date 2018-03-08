@@ -10,7 +10,7 @@ const initialState = {
     quantity: 0,
     symbols: [],
     isFormCompleted: true,
-    orderType: 'BUY'
+    buysell: 'BUY'
 }
 
 export function trade(state = initialState, action) {
@@ -32,7 +32,7 @@ export function trade(state = initialState, action) {
         symbol: action.data.symbol || '',
         price: action.data.price || 0,
         quantity: action.data.quantity || 0,
-        orderType: action.data.buysell
+        buysell: action.data.buysell
       }
     default:
       return state

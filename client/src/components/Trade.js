@@ -12,19 +12,31 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
   let cost = (price*quantity).toFixed(2) || 0
   debugger
   const isCapitalTooLow = cost > accBalance
-  const haveEnoughStocks = true //UPDATE when create portfolio!!!!
+
+  function haveEnoughStocks (symbol, quantity, myStocks) {
+    let isEnough = false
+    for(let i = 0; i < myStocks.length; i++ ) {
+      if (myStocks[i]['symbol'] === symbol ) {
+        isEnough = myStocks[i]['quantity'] < quantity
+        return
+      }
+    }
+    return isEnough
+  }
+
   accBalance = isCapitalTooLow ? accBalance : accBalance - cost
-  let orderStatus = (quantity > 0 && !isCapitalTooLow && buysell === 'BUY') || (haveEnoughStocks && buysell === 'SELL')
+  let orderStatus = (quantity > 0 && !isCapitalTooLow && buysell === 'BUY') || (haveEnoughStocks(symbol, quantity, myStocks) && buysell === 'SELL')
 
    function validateSubmission(e) {
       // e.preventDefault()
+      debugger
       if (isNaN(price)) {
         return alert("There is no such a ticker. Try again!")
       }
       if (isCapitalTooLow && buysell === 'BUY') {
         return alert('You don\'t have enough money to buy these shares.')
       }
-      if (!haveEnoughStocks && buysell === 'SELL') {
+      if (!haveEnoughStocks(symbol, quantity, myStocks) && buysell === 'SELL') {
         return alert('You don\'t have enough stocks to do this operation.')
       }
       if (quantity > 0) {

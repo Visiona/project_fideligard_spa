@@ -70,7 +70,7 @@ class TransactionsContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   debugger
   return {
-  transactions: state.transactions.history,
+  transactions: sortByDate(state.transactions.history, state.transactions.sortDateType),
   sortSymbolType: state.transactions.sortSymbolType,
   sortDateType: state.transactions.sortDateType
   }
@@ -79,7 +79,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onDateSort: (e) => {
-      // dispatch(setSortByDate({[e.target.name]: e.target.value}))
+      debugger
+      e.preventDefault();
+      dispatch(setSortByDate(e.target.getAttribute('data-sort-type')))
     },
     onSymbolSort: (e) => {
       // dispatch(SetSortBySymbol({[e.target.name]: e.target.value}))

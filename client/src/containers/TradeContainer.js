@@ -61,7 +61,8 @@ const mapStateToProps = (state, ownProps) => {
     quantity: state.trade.quantity || 0,
     accBalance: state.portfolio.accBalance,
     isFormCompleted: state.trade.isFormCompleted,
-    buysell: state.trade.orderType
+    buysell: state.trade.buysell,
+    myStocks: state.portfolio.orders
 
   }
 }
@@ -104,7 +105,7 @@ const mapDispatchToProps = (dispatch, props) => {
         }))
         props.history.push(`/transactions/success`)
       } else {
-        props.history.push(`/trade/${data.symbol}`)
+        props.history.push(`/`)
       }
     },
     updateFormStatus: (e) => {

@@ -3,15 +3,7 @@ import Input from './elements/Input'
 import SortSign from './elements/SortSign'
 
 const Transactions = ({transactions, onDateSort, onSymbolSort, onFilter, sortDateType, sortSymbolType}) => {
-  // let transactionRow = (
-  //     <tr>
-  //       <td>1/1/2014</td>
-  //       <td>APPL</td>
-  //       <td>BUY</td>
-  //       <td>1000</td>
-  //       <td>321.32</td>
-  //     </tr>
-  //   )
+
   debugger
     let transactionRow = transactions.map((t) => (
       <tr key={t.id}>

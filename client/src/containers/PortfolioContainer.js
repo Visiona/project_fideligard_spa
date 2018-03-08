@@ -2,18 +2,13 @@ import React, { Component } from 'react'
 import Portfolio from '../components/Portfolio'
 import { connect } from 'react-redux'
 import { updatePortfolio } from '../actions/portfolio'
+import { convertCountToDate } from '../helpers'
 
-
-
-let reconciledTransactions = (transactions) => {
-  
-}
 
 class PortfolioContainer extends Component {
 
-
   render() {
-    const {availableCash, portfolioStocks, onClick, onSymbolSort, sortSymbolType} = this.props
+    const {stocks, chosenDate, availableCash, portfolioStocks, onClick, onSymbolSort, sortSymbolType} = this.props
 
     return (
       <div>
@@ -23,6 +18,8 @@ class PortfolioContainer extends Component {
           onSymbolSort={onSymbolSort}
           sortSymbolType={sortSymbolType}
           availableCash={availableCash}
+          stocks={stocks}
+          chosenDate={chosenDate}
         />
       </div>
     )
@@ -34,7 +31,9 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     portfolioStocks: state.portfolio.orders,
-    availableCash: state.portfolio.accBalance
+    availableCash: state.portfolio.accBalance,
+    chosenDate: convertCountToDate(state.dates.chosenDayNumber),
+    stocks: state.stocks.finalStocksSet
   }
 }
 

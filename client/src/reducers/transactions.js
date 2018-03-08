@@ -35,14 +35,12 @@ export function transactions(state = initialState, action) {
     case SET_SORT_DATE:
       return {
         ...state,
-        sortType: action.data === 'up' ? 'down' : 'up',
-        sortName: 'Date',
+        sortDateType: action.data === 'up' ? 'down' : 'up'
       }
     case SET_SORT_SYMBOL:
       return {
         ...state,
-        sortType: action.data === 'up' ? 'down' : 'up',
-        sortName: 'Symbol',
+        sorSymbolType: action.data === 'up' ? 'down' : 'up'
       }
     default:
       return state
