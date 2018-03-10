@@ -24,7 +24,7 @@ const LinkTrade = ({children, pathname, price, symbol, date}) => {
   )
 }
 
-const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sortType}) => {
+const Stocks = ({stocks, chosenDate, symbols, isFetching, onChangeStocks, onClick, sortType}) => {
   if (!stocks) {
     return null
   }
@@ -50,7 +50,7 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChange, onClick, sor
         <div className="callout clearfix">
           <h4 className='float-left'>Stocks on {chosenDate}</h4>
           <div className='float-right'>
-            Filter: <Input onChange={onChange}  />
+            Filter: <Input onChange={onChangeStocks} data-filter-type="currentFilter"  />
           </div>
         </div>
         <table className="hover" >

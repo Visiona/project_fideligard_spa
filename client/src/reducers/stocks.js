@@ -36,9 +36,10 @@ export function stocks(state = initialState, action) {
         error: action.error
       }
     case SET_FILTER:
+    debugger
       return {
         ...state,
-        currentFilter: action.data,
+        currentFilter: action.data.currentFilter,
         isFetching: false,
         sortType: 'right'
       }

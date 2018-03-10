@@ -1,11 +1,11 @@
 import React from 'react'
 // import PropTypes from 'react-redux'
 
-const Input = (props) => {
-  const classNames = `form-control ${props.className}`
+const Input = ({ onChange, className, props}) => {
+  const classNames = `form-control ${className}`
 
   return (
-    <input className={classNames} {... props} />
+    <input className={classNames} onChange={onChange} {...props} />
   )
 }
 

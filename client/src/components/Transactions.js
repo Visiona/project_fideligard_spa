@@ -2,7 +2,7 @@ import React from 'react'
 import Input from './elements/Input'
 import SortSign from './elements/SortSign'
 
-const Transactions = ({transactions, onDateSort, onSymbolSort, onFilter, sortDateType, sortSymbolType}) => {
+const Transactions = ({transactions, onDateSort, onSymbolSort, onFilterTran, sortDateType, sortSymbolType, currentFilterTran}) => {
 
   debugger
     let transactionRow = transactions.map((t) => (
@@ -21,7 +21,7 @@ const Transactions = ({transactions, onDateSort, onSymbolSort, onFilter, sortDat
       <div className="callout clearfix">
         <h4 className='float-left'>Transactions</h4>
         <div className='float-right'>
-          Filter: <Input onChange={onFilter}  />
+          Filter: <Input onChange={onFilterTran} data-filter-type="currentFilterTran" />
         </div>
       </div>
 

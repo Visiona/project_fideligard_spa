@@ -21,7 +21,7 @@ class StocksContainer extends Component {
 
 
   render() {
-    const {stocks, symbols, chosenDate, isFetching, onChange, onClick, sortType} = this.props
+    const {stocks, symbols, chosenDate, isFetching, onChangeStocks, onClick, sortType} = this.props
     return (
       <div>
         <Stocks
@@ -29,7 +29,7 @@ class StocksContainer extends Component {
           chosenDate={chosenDate}
           isFetching={isFetching}
           symbols={symbols}
-          onChange={onChange}
+          onChangeStocks={onChangeStocks}
           onClick={onClick}
           sortType={sortType}
         />
@@ -77,8 +77,9 @@ const mapDispatchToProps = (dispatch) => {
     getStocksData: (data) => {
       dispatch(getStocksData(data))
     },
-    onChange: (e) => {
-      dispatch(setFilter(e.target.value))
+    onChangeStocks: (e) => {
+      debugger
+      dispatch(setFilter( {currentFilter: e.target.value} ))
     },
     onClick: (e) => {
       e.preventDefault();

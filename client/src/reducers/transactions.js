@@ -7,14 +7,14 @@ import { CREATE_TRANSACTION,
 const initialState = {
   ref: 10,
   symbol: '',
-  date: '',
+  chosenDate: '',
   type: '',
   quantity: '',
   price: '',
   sortName: '',
   sortDateType: 'right',
   sortSymbolType: 'right',
-  currentFilter: '',
+  currentFilterTran: '',
   history: []
 }
 
@@ -29,8 +29,7 @@ export function transactions(state = initialState, action) {
     case SET_FILTER:
       return {
         ...state,
-        currentFilter: action.data,
-        sortType: 'right'
+        currentFilterTran: action.data.currentFilterTran,
       }
     case SET_SORT_DATE:
       return {
@@ -40,7 +39,7 @@ export function transactions(state = initialState, action) {
     case SET_SORT_SYMBOL:
       return {
         ...state,
-        sorSymbolType: action.data === 'up' ? 'down' : 'up'
+        sortSymbolType: action.data === 'up' ? 'down' : 'up'
       }
     default:
       return state

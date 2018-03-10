@@ -15,7 +15,7 @@ export function createTransaction(data) {
   }
 }
 
-export function setFilter(data) {
+export function setFilterTransactions(data) {
   return {
     type: SET_FILTER,
     data: data
