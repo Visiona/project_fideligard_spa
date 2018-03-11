@@ -5,6 +5,7 @@ import {
   Redirect,
   Navlink,
   Switch } from 'react-router-dom'
+import ScrollToTop from './ScrollToTop'
 import ReactDOM from 'react-dom';
 import Navbar from './Navbar'
 import StocksContainer from '../containers/StocksContainer'
@@ -27,23 +28,25 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className='main'>
-          <Navbar />
-          <DateContainer />
-          <div className='wrap row small-up-2 medium-up-2'>
-            <div className="column">
-              <StocksContainer />
-            </div>
-            <div className="column ">
-              <Switch>
-                <Route exact path='/trade/:ticker?' component={TradeContainer} />
-                <Route exact path='/portfolio' component={PortfolioContainer} />
-                <Route exact path='/transactions' component={TransactionsContainer} />
-                <Route exact path='/transactions/success' render={() => <h1>Transaction was successfull</h1>} component={TransactionsContainer} />
-              </Switch>
+        <ScrollToTop>
+          <div className='main'>
+            <Navbar />
+            <DateContainer />
+            <div className='wrap row small-up-2 medium-up-2'>
+              <div className="column">
+                <StocksContainer />
+              </div>
+              <div className="column ">
+                <Switch>
+                  <Route exact path='/trade/:ticker?' component={TradeContainer} />
+                  <Route exact path='/portfolio' component={PortfolioContainer} />
+                  <Route exact path='/transactions' component={TransactionsContainer} />
+                  <Route exact path='/transactions/success' render={() => <h1>Transaction was successfull</h1>} component={TransactionsContainer} />
+                </Switch>
+              </div>
             </div>
           </div>
-        </div>
+        </ScrollToTop>
       </Router>
 
     );

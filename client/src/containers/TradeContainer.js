@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Trade from '../components/Trade'
 import { connect } from 'react-redux'
 import { convertDateToCount } from '../helpers'
-import { updateForm, updateSymbol, updateFormStatus} from '../actions/trade'
+import { updateForm, updateSymbol, updateFormStatus, updateBuySell} from '../actions/trade'
 import { getStocksData } from '../actions/stocks'
 import { setCurrentDate } from '../actions/dates'
 import { createTransaction } from '../actions/transactions'
@@ -27,7 +27,7 @@ class TradeContainer extends Component {
   }
 
   render() {
-    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, buysell, isFormCompleted, updateFormStatus} = this.props
+    const {symbol, chosenDateCount, price, accBalance, quantity, onSubmit, onChange, myStocks, onChangeDate, onChangeSymbol, formState, buysell, isFormCompleted, updateFormStatus, onChangeBuySell} = this.props
 
     return (
       <div>
@@ -45,6 +45,7 @@ class TradeContainer extends Component {
           isFormCompleted={isFormCompleted}
           buysell={buysell}
           updateFormStatus={updateFormStatus}
+          onChangeBuySell={onChangeBuySell}
         />
       </div>
     )
@@ -53,6 +54,7 @@ class TradeContainer extends Component {
 
 
 const mapStateToProps = (state, ownProps) => {
+  debugger
   let ticker = ownProps.match.params.ticker
   return {
     chosenDateCount: state.dates.chosenDayNumber,
@@ -75,6 +77,9 @@ const mapDispatchToProps = (dispatch, props) => {
         dispatch(updateFormStatus(false))
       }
     },
+    onChangeBuySell: (e) => {
+      dispatch(updateBuySell(e.target.value))
+    },
     onChangeDate: (e) => {
       let dateCount = convertDateToCount(e.target.value)
       dispatch(setCurrentDate(dateCount))
@@ -92,16 +97,19 @@ const mapDispatchToProps = (dispatch, props) => {
       if (!isNaN(data.price*data.quantity)) {
         debugger
         e.target.reset();
+        let cost = data.price*data.quantity
+        if (data.buysell === 'SELL') cost *= -1;
         dispatch(updateFormStatus(!data.quantity))
         dispatch(createTransaction(data))
         dispatch(updatePortfolio(data))
-        dispatch(updateBalance(data.price*data.quantity))
+        dispatch(updateBalance(cost))
         dispatch(updateForm({
           chosenDate: '',
           symbol: '',
           price: '',
           quantity: 0,
-          symbols: []
+          symbols: [],
+          buysell: 'BUY'
         }))
         props.history.push(`/transactions/success`)
       } else {

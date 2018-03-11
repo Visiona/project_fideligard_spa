@@ -1,6 +1,7 @@
 import { UPDATE_FORM,
         UPDATE_SYMBOL,
-        UPDATE_FORM_STATUS} from '../actions/trade'
+        UPDATE_FORM_STATUS,
+        UPDATE_BUYSELL } from '../actions/trade'
 
 
 const initialState = {
@@ -8,7 +9,6 @@ const initialState = {
     symbol: '',
     price: '',
     quantity: 0,
-    symbols: [],
     isFormCompleted: true,
     buysell: 'BUY'
 }
@@ -20,8 +20,12 @@ export function trade(state = initialState, action) {
         ...state,
         symbol: action.data
       }
+    case UPDATE_BUYSELL:
+      return {
+        ...state,
+        buysell: action.data
+      }
     case UPDATE_FORM_STATUS:
-    debugger
       return {
         ...state,
         isFormCompleted: action.data
@@ -29,10 +33,8 @@ export function trade(state = initialState, action) {
     case UPDATE_FORM:
       return {
         ...state,
-        symbol: action.data.symbol || '',
         price: action.data.price || 0,
-        quantity: action.data.quantity || 0,
-        buysell: action.data.buysell
+        quantity: action.data.quantity || 0
       }
     default:
       return state

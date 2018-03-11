@@ -13,7 +13,7 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
   }
 
   function costBasisPortfolio(stocks, portfolioStocks) {
-    debugger
+    if (!portfolioStocks[0]) return portfolioStats
     for( let element of portfolioStocks) {
       portfolioStats.cost = (portfolioStats.cost + element.quantity*element.price).toFixed(2)
       portfolioStats.currentValue = portfolioStats.currentValue + stocks[element.symbol]['today']*element.quantity
@@ -38,21 +38,25 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
     </tr>
   )
 
-  const currentPortfolio = portfolioStocks.map((p) => (
-    <tr key={p.symbol}>
-      <td>{p.symbol}</td>
-      <td>{p.quantity}</td>
-      <td>${(p.quantity*p.price).toFixed(2)}</td>
-      <td>${(stocks[p.symbol]['today']*p.quantity).toFixed(2)}</td>
-      <td>${((stocks[p.symbol]['today'] - p.price)*p.quantity).toFixed(2)}</td>
-      <td>${stocks[p.symbol]['today']}</td>
-      <td>${stocks[p.symbol]['1d']}</td>
-      <td>${stocks[p.symbol]['7d']}</td>
-      <td>${stocks[p.symbol]['30d']}</td>
-      <td><LinkTrade children='trade' pathname='/trade' symbol={p.sym} date={chosenDate} /></td>
-    </tr>
+  if (portfolioStocks[0]) {
+    var currentPortfolio = portfolioStocks.map((p) => (
+      <tr key={p.symbol}>
+        <td>{p.symbol}</td>
+        <td>{p.quantity}</td>
+        <td>${(p.quantity*p.price).toFixed(2)}</td>
+        <td>${(stocks[p.symbol]['today']*p.quantity).toFixed(2)}</td>
+        <td>${((stocks[p.symbol]['today'] - p.price)*p.quantity).toFixed(2)}</td>
+        <td>${stocks[p.symbol]['today']}</td>
+        <td>${stocks[p.symbol]['1d']}</td>
+        <td>${stocks[p.symbol]['7d']}</td>
+        <td>${stocks[p.symbol]['30d']}</td>
+        <td><LinkTrade children='trade' pathname='/trade' symbol={p.sym} date={chosenDate} /></td>
+      </tr>
+    ))
+  } else {
+    var currentPortfolio = null
+  }
 
-  ))
 
   return (
       <div className='stock-box'>

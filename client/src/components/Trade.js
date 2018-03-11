@@ -6,30 +6,28 @@ import { convertCountToDate } from '../helpers'
 const dateFormat = require('dateformat')
 
 
-const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, buysell, updateFormStatus}) => {
+const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, buysell, updateFormStatus, onChangeBuySell}) => {
   let currentDate = convertCountToDate(chosenDateCount)
   const formattedDate = dateFormat(currentDate, "yyyy-mm-dd")
   let cost = (price*quantity).toFixed(2) || 0
-  debugger
   const isCapitalTooLow = cost > accBalance
 
   function haveEnoughStocks (symbol, quantity, myStocks) {
     let isEnough = false
     for(let i = 0; i < myStocks.length; i++ ) {
       if (myStocks[i]['symbol'] === symbol ) {
-        isEnough = myStocks[i]['quantity'] < quantity
-        return
+        isEnough = myStocks[i]['quantity'] >= quantity
       }
     }
     return isEnough
   }
 
-  accBalance = isCapitalTooLow ? accBalance : accBalance - cost
-  let orderStatus = (quantity > 0 && !isCapitalTooLow && buysell === 'BUY') || (haveEnoughStocks(symbol, quantity, myStocks) && buysell === 'SELL')
+  accBalance = buysell === 'BUY' ? accBalance - cost : accBalance + cost
+  debugger
+  let orderStatus = (quantity > 0 && !isCapitalTooLow && buysell === 'BUY') || (quantity > 0 &&  haveEnoughStocks(symbol, quantity, myStocks) && buysell === 'SELL')
 
    function validateSubmission(e) {
       // e.preventDefault()
-      debugger
       if (isNaN(price)) {
         return alert("There is no such a ticker. Try again!")
       }
@@ -70,7 +68,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
               <label htmlFor="buysell" className="text-right middle">Buy/Sell</label>
             </div>
             <div className="small-9 cell">
-            <select name="buysell" onChange={onChange} >
+            <select name="buysell" onChange={onChangeBuySell} >
               <option value="BUY">BUY</option>
               <option value="SELL">SELL</option>
               </select>
@@ -125,7 +123,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
       <div className="columns small-6">
 
         <h6>Cash Available</h6>
-        <p>${accBalance}</p>
+        <p>${accBalance.toFixed(2)}</p>
         <h6>Order Status</h6>
         <p>{orderStatus ? 'VALID' : 'INVALID'}</p>
 
