@@ -1,43 +1,59 @@
 import { UPDATE_PORTFOLIO,
         UPDATE_BALANCE} from '../actions/portfolio'
+import { bake_cookie, read_cookie} from 'sfcookies'
 
+
+function reconcileOrders(orders, data) {
+  let ordersArr = [];
+  orders.forEach((order) => {
+      if (order.symbol === data.symbol) {
+        if (order.quantity !== data.quantity) {
+         ordersArr.push({ symbol: order.symbol,
+                  buysell: 'SELL',
+                  quantity: order.quantity - data.quantity,
+                  chosenDate: order.chosenDate,
+                  price: order.price })
+        }
+      }
+    })
+  return ordersArr
+}
+
+
+// let data = {symbol: "AAL", buysell: "SELL", quantity: "4", chosenDate: "2012-01-06", price: "5.60"}
+// let orders = [{symbol: "AAL", buysell: "BUY", quantity: "5", chosenDate: "2012-01-06", price: "5.60"}]
 
 const initialState = {
-  // totalCost: 0,
-  // profitLoss: 0,
-  // currentValue: 0,
-  // historicalValues: {'1d': 0, '7d': 0, '30d': 0},
-  accBalance: 5000,
+  accBalance: parseInt(read_cookie('history')) || 5000,
   orders: []
-
 }
 
 export function portfolio(state = initialState, action) {
+  // state.accBalance = read_cookie('balance')
+  state.orders = read_cookie('orders')
   switch(action.type) {
     case UPDATE_PORTFOLIO:
     if (action.data.buysell === 'BUY') {
+      let orders = [...state.orders, action.data]
+      bake_cookie('orders', orders)
       return {
         ...state,
-        orders: [...state.orders, action.data]
+        orders: orders
       }
     } else {
+      let orders = reconcileOrders(state.orders, action.data)
+      bake_cookie('orders', orders)
       return {
         ...state,
-        orders:   state.orders.map((order) => {
-            if (order.symbol === action.data.symbol) {
-              if (order.quantity === action.data.quantity) {
-                return null
-              } else {
-                order.quantity = order.quantity - action.data.quantity
-              }
-            }
-          })
+        orders: orders
         }
     }
     case UPDATE_BALANCE:
+      let balance = state.accBalance - action.data
+      bake_cookie('balance', balance)
       return {
         ...state,
-        accBalance: state.accBalance - action.data
+        accBalance: balance
       }
     default:
       return state

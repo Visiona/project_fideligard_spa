@@ -47,12 +47,15 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChangeStocks, onClic
   } else {
     return (
       <div className='stock-box'>
+
         <div className="callout clearfix">
           <h4 className='float-left'>Stocks on {chosenDate}</h4>
           <div className='float-right'>
-            Filter: <Input onChange={onChangeStocks} data-filter-type="currentFilter"  />
+            Filter: <Input onChange={onChangeStocks} data-filter-type="currentFilter" />
           </div>
         </div>
+
+        <div className='table-scroll'>
         <table className="hover" >
           <thead>
             <tr>
@@ -70,6 +73,8 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChangeStocks, onClic
             {stockRow}
           </tbody>
         </table>
+        </div>
+
       </div>
     )
   }

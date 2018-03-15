@@ -10,19 +10,27 @@ class PortfolioContainer extends Component {
   render() {
     const {stocks, chosenDate, availableCash, portfolioStocks, onClick, onSymbolSort, sortSymbolType} = this.props
 
-    return (
-      <div>
+    if (Object.keys(stocks).length > 0) {
+      console.log(stocks)
+      return (
+        <div>
         <Portfolio
-          portfolioStocks={portfolioStocks}
-          onClick={onClick}
-          onSymbolSort={onSymbolSort}
-          sortSymbolType={sortSymbolType}
-          availableCash={availableCash}
-          stocks={stocks}
-          chosenDate={chosenDate}
+        portfolioStocks={portfolioStocks}
+        onClick={onClick}
+        onSymbolSort={onSymbolSort}
+        sortSymbolType={sortSymbolType}
+        availableCash={availableCash}
+        stocks={stocks}
+        chosenDate={chosenDate}
         />
-      </div>
-    )
+        </div>
+      )
+    } else {
+      return (
+        <h3>...waiting for stocks to load</h3>
+      )
+    }
+
   }
 }
 

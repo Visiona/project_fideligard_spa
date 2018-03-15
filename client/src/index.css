@@ -33,3 +33,36 @@ table {
   text-align: right;
   padding: 10px 50px;
 }
+
+html {
+  background: url(walls_street.jpg) no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+
+/* #backimage {
+  /* background-image: url('/public/walls_street.jpg'); */
+  /* background: #ccc url("walls_street.jpg") no-repeat center center fixed; */
+  /* background: #ccc url("walls_street.jpg"), linear-gradient(#ada996 #f2f2f2 #dbdbdb #eaeaea); */
+  /* opacity: 0.1; */
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  }*/
+
+/* #backimage-parent {
+  position: relative;
+} */
+
+.stock-box {
+    overflow-y: scroll;
+    max-height: 1000px;
+}
+
+div.main {
+}

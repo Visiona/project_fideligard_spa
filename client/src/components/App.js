@@ -30,13 +30,16 @@ class App extends Component {
       <Router>
         <ScrollToTop>
           <div className='main'>
+
             <Navbar />
             <DateContainer />
-            <div className='wrap row small-up-2 medium-up-2'>
-              <div className="column">
+
+            <div className='row align-space'>
+
+              <div className="columns small-6">
                 <StocksContainer />
               </div>
-              <div className="column ">
+              <div className="columns small-6">
                 <Switch>
                   <Route exact path='/trade/:ticker?' component={TradeContainer} />
                   <Route exact path='/portfolio' component={PortfolioContainer} />
@@ -44,6 +47,7 @@ class App extends Component {
                   <Route exact path='/transactions/success' render={() => <h1>Transaction was successfull</h1>} component={TransactionsContainer} />
                 </Switch>
               </div>
+
             </div>
           </div>
         </ScrollToTop>

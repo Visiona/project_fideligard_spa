@@ -9,12 +9,13 @@ const dateFormat = require('dateformat')
 const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, onChange, onSubmit, onChangeDate, onChangeSymbol, isFormCompleted, buysell, updateFormStatus, onChangeBuySell}) => {
   let currentDate = convertCountToDate(chosenDateCount)
   const formattedDate = dateFormat(currentDate, "yyyy-mm-dd")
-  let cost = (price*quantity).toFixed(2) || 0
+  let cost = price*quantity || 0
   const isCapitalTooLow = cost > accBalance
 
   function haveEnoughStocks (symbol, quantity, myStocks) {
     let isEnough = false
     for(let i = 0; i < myStocks.length; i++ ) {
+      debugger
       if (myStocks[i]['symbol'] === symbol ) {
         isEnough = myStocks[i]['quantity'] >= quantity
       }
@@ -80,7 +81,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
               <label htmlFor="quantity" className="text-right middle">Quantity</label>
             </div>
             <div className="small-9 cell">
-              <input type="text" name="quantity" onChange={onChange} />
+              <input type="text" name="quantity" autocomplete="off" onChange={onChange} />
             </div>
           </div>
 
@@ -108,7 +109,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
               <label htmlFor="cost" className="text-right middle">Cost</label>
             </div>
             <div className="small-9 cell">
-              <h5 data-name='cost' onChange={onChange}>{cost}</h5>
+              <h5 data-name='cost' onChange={onChange}>{cost.toFixed(2)}</h5>
             </div>
           </div>
 
@@ -123,15 +124,15 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
       <div className="columns small-6">
 
         <h6>Cash Available</h6>
+        debugger
         <p>${accBalance.toFixed(2)}</p>
         <h6>Order Status</h6>
         <p>{orderStatus ? 'VALID' : 'INVALID'}</p>
 
       </div>
       <Prompt
-        when={!isFormCompleted}
-        message={location =>
-            "You are in the middle of trading process, are you sure you want to quit?"}
+        when={!isFormCompleted }
+        message={location => ( (location.pathname.startsWith('/trade')) ? true : "You are in the middle of trading process, are you sure you want to quit?")}
       />
 
     </div>

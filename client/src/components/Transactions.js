@@ -17,7 +17,7 @@ const Transactions = ({transactions, onDateSort, onSymbolSort, onFilterTran, sor
 
 
   return (
-    <div className='stock-box'>
+    <div className='transactions'>
       <div className="callout clearfix">
         <h4 className='float-left'>Transactions</h4>
         <div className='float-right'>
@@ -25,20 +25,23 @@ const Transactions = ({transactions, onDateSort, onSymbolSort, onFilterTran, sor
         </div>
       </div>
 
-      <table className="hover">
-        <thead>
-          <tr>
-            <th width="150">Date <a onClick={onDateSort} ><SortSign sortType={sortDateType} /></a></th>
-            <th>Symbol<a onClick={onSymbolSort} ><SortSign sortType={sortSymbolType} /></a></th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          { transactionRow }
-        </tbody>
-      </table>
+
+      <div className='table-scroll'>
+        <table className="hover">
+          <thead>
+            <tr>
+              <th width="150">Date <a onClick={onDateSort} ><SortSign sortType={sortDateType} /></a></th>
+              <th>Symbol<a onClick={onSymbolSort} ><SortSign sortType={sortSymbolType} /></a></th>
+              <th>Type</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            { transactionRow }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

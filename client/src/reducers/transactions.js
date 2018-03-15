@@ -2,6 +2,7 @@ import { CREATE_TRANSACTION,
         SET_FILTER,
         SET_SORT_DATE,
         SET_SORT_SYMBOL } from '../actions/transactions'
+import { bake_cookie, read_cookie} from 'sfcookies'
 
 
 const initialState = {
@@ -19,9 +20,11 @@ const initialState = {
 }
 
 export function transactions(state = initialState, action) {
+  state.history = read_cookie('history')
   switch(action.type) {
     case CREATE_TRANSACTION:
-      debugger
+      let history = [...state.history, action.data]
+      bake_cookie('history', history)
       return {
         ...state,
         history: [...state.history, action.data]
