@@ -31,15 +31,21 @@ class App extends Component {
         <ScrollToTop>
           <div className='main'>
 
-            <Navbar />
+            <div className="top-navbar">
+              <h2 className='title'>Historical Stock Portfolio Simulator</h2>
+            </div>
+
             <DateContainer />
 
-            <div className='row align-space'>
+            <div className='row expanded align-space'>
 
-              <div className="columns small-6">
+              <div className="columns small-5">
                 <StocksContainer />
               </div>
-              <div className="columns small-6">
+              <div className="columns small-7">
+
+                <Navbar />
+
                 <Switch>
                   <Route exact path='/trade/:ticker?' component={TradeContainer} />
                   <Route exact path='/portfolio' component={PortfolioContainer} />

@@ -4,20 +4,18 @@ import { convertCountToDate } from '../helpers'
 
 
 const DateWidget = ({chosenDayNumber, min, max, onInputChange}) => (
-  <div className='row dates'>
-    <div className="columns medium-6 large-6">
-    </div>
+  <div className='dates'>
 
-    <div className="columns medium-8 large-6 large-offset-3">
-      <div className='dates-container'>
+    <div className="centrix">
+      <div className='row dates-container'>
         <div className="slider-date columns small-4 small-pull-1">
-          {convertCountToDate(min)}
+          <span className="vintage-date">{convertCountToDate(min)}</span>
         </div>
-        <div className="columns small-4 small-push-1">
-          <b>{convertCountToDate(chosenDayNumber)}</b>
+        <div className="columns small-4 maindate-container">
+          <span className="vintage-maindate">{convertCountToDate(chosenDayNumber)}</span>
         </div>
         <div className="slider-date-right columns small-4 small-push-1">
-          {convertCountToDate(max)}
+          <span className="vintage-date">{convertCountToDate(max)}</span>
         </div>
       </div>
 
@@ -30,8 +28,8 @@ const DateWidget = ({chosenDayNumber, min, max, onInputChange}) => (
           onChange={onInputChange}
         />
     </div>
-    <div className="columns medium-2 large-4">
-    </div>
+
+
   </div>
 )
 

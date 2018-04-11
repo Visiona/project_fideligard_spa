@@ -60,13 +60,25 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
 
   return (
       <div className='portfolio'>
-        <div className="callout clearfix">
-          <h4 className='float-left'>Portfolio</h4>
-          <div className='float-right'>
-            Available Cash: ${availableCash.toFixed(2)} <br />
-            Cash & Current Value of Portfolio: ${availableCash + portfolioStats.currentValue}
-          </div>
+        <div className='stock-box-title'>
+          <h4 className='quotations'>PORTFOLIO</h4>
+
+          <table className="account">
+            <thead>
+              <tr>
+                <th>Available Cash</th>
+                <th>Value of Whole Portfolio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>$ {availableCash.toFixed(2)}</td>
+                <td>$ {availableCash + portfolioStats.currentValue}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
         <table className="balance scroll" >
           <thead>
             <tr>

@@ -1,68 +1,183 @@
-/* body {
-  margin: 0;
-  padding: 0;
-} */
+div.main {
+  background-color: #262620;
+}
 
-h3.title {
+/* NAVBAR */
+
+h2.title {
   font-family: 'Old Standard TT', serif;
 }
 
-table {
-  font-family: 'Times', serif;
+/* DATE WIDGET */
+
+.dates {
+  border-bottom: 1px solid #FFF8B6;
 }
 
-.menu-link {
-  font-family: 'Old Standard TT', serif;
-  color: #120D6A;
-  font-size: 19px;
+.maindate-container {
+  text-align: center;
 }
 
-.active {
-  color: #fff;
+.vintage-maindate {
+  font-family: 'Biryani', sans-serif;
+  color: #FFF;
+  margin: 5px 0;
+  font-size: 24px;
 }
 
-.dates-container {
-  margin-bottom: 40px;
+.vintage-date {
+  font-family: 'Biryani', sans-serif;
+  color: #FFF;
+  font-size: 14px;
+}
+
+.top-navbar {
+  padding: 10px 0;
+  background-color: #262620;
+  color: #FFFFFF;
+  text-align: center;
+  border-bottom: 1px solid #FFF8B6;
+}
+
+.centrix {
+  margin-top: 10px;
+  margin-left: 25%;
+  width: 50%;
+
+}
+
+@media only screen and (max-width: 700px) {
+  .centrix {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px;
+  }
 }
 
 .slider-date-right {
   text-align: right;
 }
 
+.rangeslider {
+  margin-top: 5px;
+  margin-bottom: 35px;
+}
+
+
+
+
+
+/* MINOR MENU */
+
+.minor-navbar {
+  /* margin: 0 auto;
+  width: 100%;
+  margin-left: 25%;
+  /* border-bottom: 1px solid #FFF8B6; */
+}
+
+.minor-navbar li {
+  width: 33.1%;
+  text-align: center;
+}
+
+
+.menu-link {
+  font-family: 'Old Standard TT', serif;
+  color: #E6E6E6;
+  font-size: 19px;
+  /* border-left: 1px solid #FFF8B6;
+  border-right: 1px solid #FFF8B6; */
+
+}
+
+.active {
+  color: #262620;
+  background-color: #FFF8B6;
+  /* border: 1px solid #FFF8B6; */
+
+}
+
+.menu-link:hover {
+  color: #FFF8B6;
+  border: 1px solid #FFF8B6;
+  margin-bottom: -2px;
+  background-color: #B08C36;
+}
+
+
+/* STOCKS CONTAINER */
+
+
+.loading-msg {
+  color: #FFF8B6;
+  margin-left: 20%;
+}
+
+div.stock-box-title {
+  color: #FFF;
+  text-align: center;
+}
+
+.quotations{
+  padding-top: 6px;
+}
+
+.quotations, .filter-stock {
+  border-bottom: 1px solid #FFF8B6;
+  margin-bottom: 0;
+  font-family: 'Biryani', sans-serif;
+}
+
+.filter-stock {
+  padding: 8px 0;
+}
+
+table.account th {
+  text-align: center;
+  color: #FFF8B6;
+  font-family: 'Biryani', sans-serif;
+  padding: 2px;
+}
+
+table.account td{
+  color: #FFF8B6;
+  font-family: 'Biryani', sans-serif;
+  padding: 2px;
+}
+
+
+
+
+
+
+
+
+
+table {
+  font-family: 'Times', serif;
+}
+
+
+
+
 .show-date-container {
   text-align: right;
   padding: 10px 50px;
 }
 
-html {
-  background: url(walls_street.jpg) no-repeat center center fixed;
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;
- background-size: cover;
+
+div.stock-box, th, td {
+  /* background-color: #191915; */
+  background-color: #262620;
+  color: #B08C36;
 }
 
 
-/* #backimage {
-  /* background-image: url('/public/walls_street.jpg'); */
-  /* background: #ccc url("walls_street.jpg") no-repeat center center fixed; */
-  /* background: #ccc url("walls_street.jpg"), linear-gradient(#ada996 #f2f2f2 #dbdbdb #eaeaea); */
-  /* opacity: 0.1; */
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  }*/
 
-/* #backimage-parent {
-  position: relative;
+/* #FFF8B6 */
+
+/* .top-bar-left > *, top-bar-right > * {
+  background-color: #2A2A2A;
+  color: #EAEAEA;
 } */
-
-.stock-box {
-    overflow-y: scroll;
-    max-height: 1000px;
-}
-
-div.main {
-}

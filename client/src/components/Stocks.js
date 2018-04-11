@@ -43,17 +43,25 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChangeStocks, onClic
       // <td><LinkTrade children='trade' pathname='/trade' price={stocks[sym]['today']} symbol={sym} date={chosenDate} /></td>
 
   if (isFetching) {
-    return <h4>Loading Stocks Data ... </h4>
+    return (
+      <div className='stock-box-title'>
+        <h4 className='quotations'>QUOTATIONS</h4>
+        <div className='filter-stock'>
+          FILTER <Input onChange={onChangeStocks} data-filter-type="currentFilter" />
+        </div>
+        <p className='loading-msg'>Loading Stocks Data ... </p>
+      </div>
+    )
   } else {
     return (
       <div className='stock-box'>
 
-        <div className="callout clearfix">
-          <h4 className='float-left'>Stocks on {chosenDate}</h4>
-          <div className='float-right'>
-            Filter: <Input onChange={onChangeStocks} data-filter-type="currentFilter" />
-          </div>
+      <div className='stock-box-title'>
+        <h4 className='quotations'>QUOTATIONS</h4>
+        <div className='filter-stock'>
+          FILTER <Input onChange={onChangeStocks} data-filter-type="currentFilter" />
         </div>
+      </div>
 
         <div className='table-scroll'>
         <table className="hover" >
