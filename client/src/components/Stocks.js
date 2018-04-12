@@ -63,8 +63,8 @@ const Stocks = ({stocks, chosenDate, symbols, isFetching, onChangeStocks, onClic
         </div>
       </div>
 
-        <div className='table-scroll'>
-        <table className="hover" >
+        <div className='table-scroll stockings'>
+        <table className="hover stock-tape">
           <thead>
             <tr>
               <th width="150">

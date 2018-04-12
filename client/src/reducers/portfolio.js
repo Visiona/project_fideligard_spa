@@ -24,7 +24,7 @@ function reconcileOrders(orders, data) {
 // let orders = [{symbol: "AAL", buysell: "BUY", quantity: "5", chosenDate: "2012-01-06", price: "5.60"}]
 
 const initialState = {
-  accBalance: parseInt(read_cookie('history')) || 5000,
+  accBalance: parseInt(read_cookie('balance')) || 5000,
   orders: []
 }
 

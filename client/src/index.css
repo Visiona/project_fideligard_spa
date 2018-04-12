@@ -1,6 +1,13 @@
-div.main {
+div.main, body {
   background-color: #262620;
 }
+
+div.stock-box, th, td {
+  background-color: #191915;
+  background-color: #262620;
+  color: #B08C36;
+}
+
 
 /* NAVBAR */
 
@@ -61,10 +68,24 @@ h2.title {
 .rangeslider {
   margin-top: 5px;
   margin-bottom: 35px;
+  background-color: #FFF8B6;
 }
 
+.rangeslider:hover{
+  background: linear-gradient(-90deg, #821E16, #FFF8B6);
+}
 
+.rangeslider__handle:hover {
+  background: linear-gradient(#821E16, #FFF8B6);
+}
 
+.rangeslider-horizontal .rangeslider__fill {
+  background-color: #B08C36;
+}
+
+.rangeslider-horizontal .rangeslider__fill:hover {
+  background: linear-gradient(90deg, #821E16, #FFF8B6);
+}
 
 
 /* MINOR MENU */
@@ -82,7 +103,7 @@ h2.title {
 }
 
 
-.menu-link {
+.menu-link, input.order-button {
   font-family: 'Old Standard TT', serif;
   color: #E6E6E6;
   font-size: 19px;
@@ -91,18 +112,19 @@ h2.title {
 
 }
 
-.active {
+.active, input.order-button {
   color: #262620;
   background-color: #FFF8B6;
   /* border: 1px solid #FFF8B6; */
 
 }
 
-.menu-link:hover {
+.menu-link:hover, input.order-button:hover {
   color: #FFF8B6;
   border: 1px solid #FFF8B6;
   margin-bottom: -2px;
-  background-color: #B08C36;
+  /* background-color: #821E16; */
+  background: linear-gradient(-90deg, #821E16, #FFF8B6);
 }
 
 
@@ -119,11 +141,11 @@ div.stock-box-title {
   text-align: center;
 }
 
-.quotations{
+.quotations, .transactions, .trade {
   padding-top: 6px;
 }
 
-.quotations, .filter-stock {
+.quotations, .transactions, .filter-stock, .trade {
   border-bottom: 1px solid #FFF8B6;
   margin-bottom: 0;
   font-family: 'Biryani', sans-serif;
@@ -133,31 +155,125 @@ div.stock-box-title {
   padding: 8px 0;
 }
 
-table.account th {
-  text-align: center;
+i {
   color: #FFF8B6;
-  font-family: 'Biryani', sans-serif;
-  padding: 2px;
 }
 
-table.account td{
-  color: #FFF8B6;
-  font-family: 'Biryani', sans-serif;
-  padding: 2px;
+i:hover {
+  color: #821E16;
 }
 
+.stock-tape td {
+  padding: 4px 5px;
+  max-width: 70px;
+}
 
+.stock-tape th {
+  padding: 4px 5px;
+}
 
+.stock-tape a, .breakdown a {
+  color: #FFF8B6;
+}
 
-
-
-
+.stock-tape a:hover, .breakdown a:hover {
+  color: #821E16;
+}
 
 
 table {
   font-family: 'Times', serif;
 }
 
+table.stock-tape {
+  display: block;
+  height: 600px;
+  overflow-y: scroll;
+}
+
+table.stock-tape::-webkit-scrollbar {
+    width: 10px;
+}
+
+table.stock-tape::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 8px rgba(175,139,62,0.4);
+}
+
+table.stock-tape::-webkit-scrollbar-thumb {
+  background-color: #FFF8B6;
+  outline: 1px solid #821E16;
+}
+
+/* PORTFOLIO BOX */
+
+table.account th {
+  text-align: center;
+  font-family: 'Biryani', sans-serif;
+  padding: 2px;
+}
+
+table.account td{
+  color: 4C4C3F;
+  font-family: 'Biryani', sans-serif;
+  padding: 2px;
+}
+
+
+table.balance th, table.breakdown th {
+  text-align: center;
+  padding: 2px;
+}
+
+table.balance td, table.breakdown td {
+  color: 4C4C3F;
+  text-align: center;
+  padding: 2px;
+}
+
+table.balance, table.breakdown {
+  min-width: 500px;
+}
+
+table.transactions-hist {
+  min-width: 400px;
+}
+
+
+/* TRADE */
+
+div.trade-form label, div.trade-form {
+  font-family: 'Times', serif;
+  color: #fff;
+  font-size: 15px;
+}
+
+div.trade-form input, div.trade-form select {
+  padding: 4px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+input.form-control {
+  color: #821E16;
+}
+
+div.trade-form {
+  margin-top: 20px;
+  padding-left: 65px;
+  display: block;
+  width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+  div.trade-form {
+    overflow-x: scroll;
+    padding-left: 15px
+  }
+}
+
+input.button.order-button {
+  margin-left: 80px;
+}
 
 
 
@@ -165,19 +281,3 @@ table {
   text-align: right;
   padding: 10px 50px;
 }
-
-
-div.stock-box, th, td {
-  /* background-color: #191915; */
-  background-color: #262620;
-  color: #B08C36;
-}
-
-
-
-/* #FFF8B6 */
-
-/* .top-bar-left > *, top-bar-right > * {
-  background-color: #2A2A2A;
-  color: #EAEAEA;
-} */

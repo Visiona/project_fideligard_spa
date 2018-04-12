@@ -15,6 +15,9 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
   function costBasisPortfolio(stocks, portfolioStocks) {
     if (!portfolioStocks[0]) return portfolioStats
     for( let element of portfolioStocks) {
+      if (!stocks[element.symbol]) {
+        stocks[element.symbol] = {'today': 0, '1d': 0, '7d': 0, '30d': 0}
+      }
       portfolioStats.cost = parseInt(portfolioStats.cost + element.quantity*element.price).toFixed(2)
       portfolioStats.currentValue = portfolioStats.currentValue + stocks[element.symbol]['today']*element.quantity
       portfolioStats['1d'] = portfolioStats['1d'] + stocks[element.symbol]['1d']*element.quantity
@@ -73,13 +76,13 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
             <tbody>
               <tr>
                 <td>$ {availableCash.toFixed(2)}</td>
-                <td>$ {availableCash + portfolioStats.currentValue}</td>
+                <td>$ {(availableCash + portfolioStats.currentValue).toFixed(2)}</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <table className="balance scroll" >
+        <table className="balance" >
           <thead>
             <tr>
               <th>Cost Basis</th>
@@ -95,7 +98,6 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
           </tbody>
         </table>
 
-        <div className='table-scroll'>
           <table className="hover breakdown" >
             <thead>
               <tr>
@@ -116,7 +118,6 @@ const Portfolio = ({stocks, chosenDate, availableCash, portfolioStocks, onClick,
             </tbody>
           </table>
         </div>
-      </div>
   )
 
 }

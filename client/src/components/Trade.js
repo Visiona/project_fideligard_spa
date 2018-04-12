@@ -48,14 +48,15 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
   return (
   <div className='trade-box'>
 
-    <h4>Trade</h4>
+    <div className='stock-box-title'>
+      <h4 className='trade'>TRADE</h4>
+    </div>
 
-
-    <div className="row">
+    <div className="row trade-form">
       <div className="columns small-6">
 
         <form onSubmit={validateSubmission}>
-          <div className="grid-x grid-padding-x">
+          <div className="grid-x grid-padding-x fluid">
             <div className="small-3 cell">
               <label htmlFor="symbol" className="text-right middle">Symbol</label>
             </div>
@@ -114,7 +115,7 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
           </div>
 
           <div className="input-group-button">
-            <input type="submit" className="button" value="Place Order" onClick={updateFormStatus}
+            <input type="submit" className="button order-button" value="Place Order" onClick={updateFormStatus}
             />
           </div>
         </form>
@@ -124,7 +125,6 @@ const Trade = ({symbol, chosenDateCount, price, accBalance, quantity, myStocks, 
       <div className="columns small-6">
 
         <h6>Cash Available</h6>
-        debugger
         <p>${accBalance.toFixed(2)}</p>
         <h6>Order Status</h6>
         <p>{orderStatus ? 'VALID' : 'INVALID'}</p>
