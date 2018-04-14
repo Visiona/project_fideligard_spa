@@ -27,7 +27,7 @@ class PortfolioContainer extends Component {
       )
     } else {
       return (
-        <h3>...waiting for stocks to load</h3>
+        <p className='loading-msg'>...waiting for stocks to load</p>
       )
     }
 
