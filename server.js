@@ -20,6 +20,9 @@ app.use(function(req, res, next) {
   next()
 })
 
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
 // Extract checing status of the response
 function checkStatus(response) {
   if (!response.ok) {
@@ -30,6 +33,7 @@ function checkStatus(response) {
 
   return response
 }
+
 
 function parseJSON(response) {
   return response.json()
