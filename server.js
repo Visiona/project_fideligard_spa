@@ -57,7 +57,7 @@ app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.sendFile('./client/src/App.js')
+  res.sendFile(path.join(__dirname, '../client/src', 'index.js'));
 })
 
 function errorHandler(err, req, res, next) {
