@@ -7,11 +7,11 @@ const QUANDL_API_KEY = process.env.QUANDL_API_KEY
 const baseUrl = 'https://www.quandl.com/api/v3/datatables/WIKI/PRICES'
 
 
-app.set('port', 3001)
+// app.set('port', 3001)
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('client/build'))
+// }
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -69,7 +69,11 @@ function errorHandler(err, req, res, next) {
 
 app.use(errorHandler)
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at http://localhost:${app.get('port')}/`)
-})
+// app.listen(app.get('port'), () => {
+//   console.log(`Find the server at http://localhost:${app.get('port')}/`)
+// })
