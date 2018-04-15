@@ -9,9 +9,9 @@ const baseUrl = 'https://www.quandl.com/api/v3/datatables/WIKI/PRICES'
 
 // app.set('port', 3001)
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'))
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+}
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
