@@ -41,7 +41,6 @@ function parseJSON(response) {
 
 app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
   console.log('Requesting Stock Data from Quandl...')
-  debugger
   const dateParam = req.query.date
   const params = dateParam ? `&date=${dateParam}` : ''// &date=${dateParam}
   console.log(`here is our url: ${baseUrl}?api_key=${QUANDL_API_KEY}${params}`)
@@ -58,7 +57,7 @@ app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello to FIdeligard')
+  res.sendFile('./client/src/App.js')
 })
 
 function errorHandler(err, req, res, next) {
