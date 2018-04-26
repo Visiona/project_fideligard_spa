@@ -53,8 +53,8 @@ export function getStocksData(currentDate = '1999-11-10') {
   debugger
   return (dispatch) => {
     dispatch(stocksRequest())
-    // or i< historicDates.length
-    for(let i=0; i< 50; i++) {
+    // or i< historicDates.length...i< 50
+    for(let i=0; i< historicDates.length; i++) {
       let dateParam = '?date=' + historicDates[i]
       debugger
       promises.push(
