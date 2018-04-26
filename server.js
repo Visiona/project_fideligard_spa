@@ -46,7 +46,16 @@ app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
   .then(checkStatus)
   .then(parseJSON)
   .then((json) => {
-      debugger
+    let insideJson = json.datatable.data
+    let patt = /^[Aa].*/g;
+    let finalJson = insideJson.filter( (arr) => {
+      if (patt.test(arr[0])) {
+        return arr
+      }
+    })
+    console.log(finalJson)
+    json.datatable.data = finalJson
+    console.log(json)
       res.json(json)
   })
   .catch((error) => {
