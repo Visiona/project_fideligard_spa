@@ -20,9 +20,6 @@ app.use(function(req, res, next) {
   next()
 })
 
-// // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'client/build')));
-
 // Extract checing status of the response
 function checkStatus(response) {
   if (!response.ok) {
@@ -49,6 +46,7 @@ app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
   .then(checkStatus)
   .then(parseJSON)
   .then((json) => {
+      debugger
       res.json(json)
   })
   .catch((error) => {
