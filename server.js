@@ -53,10 +53,8 @@ app.get(['/api/fideligard', 'trade/api/fideligard'], (req, res, next) => {
         return arr
       }
     })
-    console.log(finalJson)
     json.datatable.data = finalJson
-    console.log(json)
-      res.json(json)
+    res.json(json)
   })
   .catch((error) => {
     next(error)
